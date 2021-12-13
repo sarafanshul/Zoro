@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: zoro-lint-report
-          path: app/build/reports/lint-results.html
+          path: app/build/reports/lint-results-debug.html
