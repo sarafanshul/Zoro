@@ -14,7 +14,7 @@ class ZoroApplication : Application(){
 
         if (BuildConfig.DEBUG) {
             Timber.plant(CustomDebugTree())
-            setupStrictMode()
+//            setupStrictMode()
         }
 
     }
@@ -30,7 +30,7 @@ class ZoroApplication : Application(){
         )
         StrictMode.setVmPolicy(
             StrictMode.VmPolicy.Builder()
-                .detectNonSdkApiUsage()
+//                .detectNonSdkApiUsage()
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedClosableObjects()
                 .penaltyLog()
