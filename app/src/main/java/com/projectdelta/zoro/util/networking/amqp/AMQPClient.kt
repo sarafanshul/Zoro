@@ -1,4 +1,4 @@
-package com.projectdelta.zoro.util.networking
+package com.projectdelta.zoro.util.networking.amqp
 
 import com.projectdelta.zoro.data.model.MessageData
 

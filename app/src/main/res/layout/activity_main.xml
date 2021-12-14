@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tap"
-        android:text="tap"
+        android:text="@android:string/autofill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +33,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/test"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/test"
+        app:layout_constraintTop_toBottomOf="@+id/msg"
+        tools:layout_editor_absoluteX="10dp"
+        android:autofillHints="name"
+        android:inputType="textAutoComplete"
+        tools:ignore="LabelFor" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

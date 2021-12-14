@@ -72,9 +72,9 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     private fun initUI(){
         binding.tap.setOnClickListener{
-            lifecycleScope.launch(Dispatchers.IO){
-                preferenceManager.updateUserId( generateUniqueUserId() )
-            }
+            viewModel.sendData(
+                binding.et.text.toString()
+            )
         }
     }
 

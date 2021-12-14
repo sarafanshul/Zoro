@@ -10,9 +10,11 @@
     </option>
   </component>
   <component name="EntryPointsManager">
-    <list size="2">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="dagger.Provides" />
       <item index="1" class="java.lang.String" itemvalue="dagger.hilt.InstallIn" />
+      <item index="2" class="java.lang.String" itemvalue="retrofit2.http.GET" />
+      <item index="3" class="java.lang.String" itemvalue="retrofit2.http.POST" />
     </list>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">

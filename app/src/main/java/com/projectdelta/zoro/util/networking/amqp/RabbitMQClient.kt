@@ -1,4 +1,4 @@
-package com.projectdelta.zoro.util.networking
+package com.projectdelta.zoro.util.networking.amqp
 
 import com.google.gson.Gson
 import com.projectdelta.zoro.data.model.MessageData
@@ -37,7 +37,7 @@ class RabbitMQClient(
 
         fun getInstance(host: String, port: Int, uName: String
                         , password: String ,deserializer: Gson
-        ) : RabbitMQClient{
+        ) : RabbitMQClient {
             val tempInstance = INSTANCE
             if( tempInstance != null )
                 return tempInstance
