@@ -34,8 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toTopOf="@+id/test"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="10dp" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

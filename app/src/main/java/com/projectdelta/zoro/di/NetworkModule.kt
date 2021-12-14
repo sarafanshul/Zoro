@@ -1,10 +1,17 @@
 package com.projectdelta.zoro.di
 
 import android.app.Application
+import com.google.gson.Gson
 import com.projectdelta.zoro.BuildConfig
 import com.projectdelta.zoro.util.Constants.CONNECTION_TIMEOUT
 import com.projectdelta.zoro.util.Constants.READ_TIMEOUT
 import com.projectdelta.zoro.util.Constants.WRITE_TIMEOUT
+import com.projectdelta.zoro.util.networking.AMQPClient
+import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_API
+import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_PORT
+import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_USER_NAME
+import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_USER_PASSWORD
+import com.projectdelta.zoro.util.networking.RabbitMQClient
 import com.projectdelta.zoro.util.networking.connectivity.ConnectivityManager
 import com.projectdelta.zoro.util.networking.connectivity.ConnectivityManagerImpl
 import dagger.Module
@@ -53,6 +60,18 @@ object NetworkModule {
             if (BuildConfig.DEBUG)
                 addNetworkInterceptor(loggingInterceptor)
         }.build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideAMQPClient( gson: Gson ) : AMQPClient {
+        return RabbitMQClient.getInstance(
+            host = RABBIT_API ,
+            port = RABBIT_PORT ,
+            uName = RABBIT_USER_NAME ,
+            password = RABBIT_USER_PASSWORD ,
+            deserializer = gson
+        )
     }
 
 //    @Singleton

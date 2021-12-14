@@ -51,7 +51,8 @@ class ConnectionLiveData(
         ) {
             val isInternet = networkCapabilities.hasCapability(NET_CAPABILITY_INTERNET)
             val isValidated = networkCapabilities.hasCapability(NET_CAPABILITY_VALIDATED)
-            postValue(isInternet && isValidated)
+            if( isInternet == isValidated )
+                postValue(isInternet && isValidated)
         }
 
         override fun onLost(network: Network) {

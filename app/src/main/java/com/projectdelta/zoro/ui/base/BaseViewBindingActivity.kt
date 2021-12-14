@@ -2,6 +2,7 @@ package com.projectdelta.zoro.ui.base
 
 import androidx.viewbinding.ViewBinding
 
+@Suppress("PropertyName")
 abstract class BaseViewBindingActivity<VB : ViewBinding> : BaseActivity() {
 
     protected var _binding: VB? = null

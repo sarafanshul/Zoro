@@ -16,7 +16,7 @@ class ConnectivityManagerImpl(
 
     private val connectionLiveData = ConnectionLiveData(application)
 
-    private val networkObserver = Observer<Boolean> { isConnected -> isNetworkAvailable.value = isConnected }
+    private val networkObserver = Observer<Boolean> { isConnected -> isNetworkAvailable.postValue(isConnected) }
 
     override val isNetworkAvailable = MutableLiveData<Boolean>()
 
