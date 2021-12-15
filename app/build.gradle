@@ -76,11 +76,8 @@ dependencies {
     // Viewpager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
-    // Material Dialogs
-    def material_afollestad_version = "3.3.0"
-    implementation "com.afollestad.material-dialogs:core:$material_afollestad_version"
-    implementation "com.afollestad.material-dialogs:bottomsheets:$material_afollestad_version"
-    implementation "com.afollestad.material-dialogs:lifecycle:$material_afollestad_version"
+    // Alert Dialogs
+    implementation 'com.github.tapadoo:alerter:7.2.4'
 
     // logging
     implementation 'com.jakewharton.timber:timber:5.0.1'

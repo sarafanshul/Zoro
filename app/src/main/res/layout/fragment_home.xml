@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingTop="@dimen/base_padding"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:id="@+id/character_rv"
+        android:id="@+id/user_rv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_home"
         tools:itemCount="7"

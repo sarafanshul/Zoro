@@ -8,6 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.databinding.ActivityMainBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
+import com.projectdelta.zoro.util.system.lang.chop
+import com.projectdelta.zoro.util.system.lang.getResourceColor
+import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +44,15 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     viewModel.unregisterClient()
                 }
             }
+        }
+
+        viewModel.data.observe(this){
+            Alerter.create(this)
+                .setTitle("New Message from ${it?.senderId?.chop(20)}")
+                .setText(it?.data!!)
+                .setDuration(5000L)
+                .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))
+                .show()
         }
     }
 
