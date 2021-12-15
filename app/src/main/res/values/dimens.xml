@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_padding">10dp</dimen>
+    <dimen name="item_img_max_height">75dp</dimen>
+    <dimen name="item_padding">4dp</dimen>
+</resources>
