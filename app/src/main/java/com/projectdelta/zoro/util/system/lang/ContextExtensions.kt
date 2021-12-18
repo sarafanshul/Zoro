@@ -29,6 +29,7 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.NotificationCompat
@@ -40,11 +41,18 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import com.projectdelta.zoro.R
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
@@ -389,5 +397,45 @@ fun Fragment.safeNavigate(directions: NavDirections) {
     val destination = navController.currentDestination as FragmentNavigator.Destination
     if (javaClass.name == destination.className) {
         navController.navigate(directions)
+    }
+}
+
+/**
+ * Wrapper for observing **Latest** Flows in a lifecycle aware state in an activity.
+ */
+fun <T> AppCompatActivity.collectLatestLifecycleFlow(
+    flow : Flow<T>, collect : suspend (T) -> Unit
+) {
+    lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED){
+            flow.collectLatest(collect)
+        }
+    }
+}
+
+/**
+ * Wrapper for observing **Latest** Flows in a lifecycle aware state in an Fragment.
+ * [Refer this for more](https://medium.com/androiddevelopers/a-safer-way-to-collect-flows-from-android-uis-23080b1f8bda)
+ */
+fun <T> Fragment.collectLatestLifecycleFlow(
+    flow : Flow<T>, collect : suspend (T) -> Unit
+) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            flow.collectLatest(collect)
+        }
+    }
+}
+
+/**
+ * Wrapper for observing Flows in a lifecycle aware state in an Fragment.
+ */
+fun <T> Fragment.collectLifecycleFlow(
+    flow : Flow<T>, collect : suspend (T) -> Unit
+) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            flow.collect(collect)
+        }
     }
 }

@@ -22,5 +22,4 @@ class MessageRepositoryImpl (
             else -> -1
         }
     }
-
 }

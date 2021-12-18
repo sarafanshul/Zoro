@@ -1,7 +1,6 @@
 package com.projectdelta.zoro.ui.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.di.NetworkModule

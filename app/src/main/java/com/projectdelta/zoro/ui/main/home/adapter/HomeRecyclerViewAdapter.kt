@@ -1,6 +1,7 @@
 package com.projectdelta.zoro.ui.main.home.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,6 +39,12 @@ class HomeRecyclerViewAdapter(
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
                 tvSubTitle.setText(R.string.home)
+                if(user.messages != null){
+                    tvBadge.visibility = View.VISIBLE
+                    tvBadge.text = if (user.messages!! > 9) "9+" else user.messages.toString()
+                }else{
+                    tvBadge.visibility = View.GONE
+                }
             }
         }
     }

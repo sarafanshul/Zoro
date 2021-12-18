@@ -21,4 +21,11 @@ class UserRepositoryImpl(
             else -> null
         }
     }
+
+    override suspend fun getFriends(userId: String): List<User> {
+        return when( val result : ApiResult<List<User>?> = api.getFriends(userId) ){
+            is ApiResult.Success -> result.data ?: listOf()
+            else -> listOf()
+        }
+    }
 }

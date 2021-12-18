@@ -2,11 +2,11 @@ package com.projectdelta.zoro.data.remote
 
 import com.projectdelta.zoro.data.model.MessageData
 import com.projectdelta.zoro.data.model.QueueInformation
-import com.projectdelta.zoro.util.networking.apiCallAdapter.ApiResult
 import com.projectdelta.zoro.util.networking.NetworkingConstants.MESSAGE_URL
 import com.projectdelta.zoro.util.networking.NetworkingConstants.QUERY_QUEUE
 import com.projectdelta.zoro.util.networking.NetworkingConstants.SUB_URL_COUNT
 import com.projectdelta.zoro.util.networking.NetworkingConstants.SUB_URL_SEND
+import com.projectdelta.zoro.util.networking.apiCallAdapter.ApiResult
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

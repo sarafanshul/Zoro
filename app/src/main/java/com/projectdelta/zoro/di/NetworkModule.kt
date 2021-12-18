@@ -8,14 +8,14 @@ import com.projectdelta.zoro.data.remote.UserApi
 import com.projectdelta.zoro.util.Constants.CONNECTION_TIMEOUT
 import com.projectdelta.zoro.util.Constants.READ_TIMEOUT
 import com.projectdelta.zoro.util.Constants.WRITE_TIMEOUT
-import com.projectdelta.zoro.util.networking.apiCallAdapter.ApiResultCallAdapterFactory
 import com.projectdelta.zoro.util.networking.NetworkingConstants.BASE_URL
-import com.projectdelta.zoro.util.networking.amqp.AMQPClient
 import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_API
 import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_PORT
 import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_USER_NAME
 import com.projectdelta.zoro.util.networking.NetworkingConstants.RABBIT_USER_PASSWORD
+import com.projectdelta.zoro.util.networking.amqp.AMQPClient
 import com.projectdelta.zoro.util.networking.amqp.RabbitMQClient
+import com.projectdelta.zoro.util.networking.apiCallAdapter.ApiResultCallAdapterFactory
 import com.projectdelta.zoro.util.networking.connectivity.ConnectivityManager
 import com.projectdelta.zoro.util.networking.connectivity.ConnectivityManagerImpl
 import dagger.Module

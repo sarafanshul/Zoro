@@ -10,7 +10,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/base_padding"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:id="@+id/user_rv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
