@@ -1,7 +1,7 @@
 package com.projectdelta.zoro.util.networking.amqp
 
 import com.google.gson.Gson
-import com.projectdelta.zoro.data.model.MessageData
+import com.projectdelta.zoro.data.model.Message
 import com.rabbitmq.client.*
 import timber.log.Timber
 import java.io.IOException
@@ -80,14 +80,14 @@ class RabbitMQClient(
     /**
      * Run this method in a IO Scope
      */
-    override fun consumeMessage(queue : String ,doSomething: (m: MessageData?) -> Unit) {
+    override fun consumeMessage(queue : String ,doSomething: (m: Message?) -> Unit) {
         try {
             channel.basicConsume(queue, AUTO_ACKNOWLEDGMENT ,
                 object : DefaultConsumer(channel){
                     override fun handleDelivery(tag: String, e: Envelope?, p: AMQP.BasicProperties?, body: ByteArray) {
                         super.handleDelivery(tag, e, p, body)
                         val jsonString = String(body)
-                        val messageData = deserializer.fromJson(jsonString ,MessageData::class.java)
+                        val messageData = deserializer.fromJson(jsonString ,Message::class.java)
                         doSomething(messageData)
                         Timber.e("${e?.deliveryTag} ${messageData.data}")
                     }

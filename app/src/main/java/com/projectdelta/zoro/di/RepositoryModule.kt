@@ -1,5 +1,6 @@
 package com.projectdelta.zoro.di
 
+import com.projectdelta.zoro.data.local.MessageDao
 import com.projectdelta.zoro.data.remote.MessageApi
 import com.projectdelta.zoro.data.remote.UserApi
 import com.projectdelta.zoro.data.repository.MessageRepository
@@ -18,8 +19,10 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideMessageRepository( api : MessageApi ) : MessageRepository{
-        return MessageRepositoryImpl(api)
+    fun provideMessageRepository(
+        api : MessageApi ,messageDao: MessageDao
+    ) : MessageRepository{
+        return MessageRepositoryImpl(api , messageDao)
     }
 
     @Singleton

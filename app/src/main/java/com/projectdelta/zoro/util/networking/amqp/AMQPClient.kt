@@ -1,6 +1,6 @@
 package com.projectdelta.zoro.util.networking.amqp
 
-import com.projectdelta.zoro.data.model.MessageData
+import com.projectdelta.zoro.data.model.Message
 
 interface AMQPClient {
 
@@ -8,5 +8,5 @@ interface AMQPClient {
 
     fun unregisterChannel()
 
-    fun consumeMessage( queue : String , doSomething : (m : MessageData?) -> Unit )
+    fun consumeMessage( queue : String , doSomething : (m : Message?) -> Unit )
 }

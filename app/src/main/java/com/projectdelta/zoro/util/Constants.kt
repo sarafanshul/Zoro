@@ -25,4 +25,7 @@ object Constants {
     fun generateUniqueUserId() : String =
         UUID.randomUUID().toString()
 
+    // Database
+    const val DATABASE_NAME = "zoro_database"
+    const val MESSAGE_TABLE = "message_table"
 }

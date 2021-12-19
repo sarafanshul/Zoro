@@ -2,7 +2,8 @@ package com.projectdelta.zoro.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.projectdelta.zoro.data.model.MessageData
+import com.projectdelta.zoro.data.model.Message
+import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.util.networking.amqp.AMQPClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -11,24 +12,21 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.collections.MutableList
-import kotlin.collections.MutableMap
-import kotlin.collections.mutableListOf
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val amqpClient: AMQPClient
+    private val amqpClient: AMQPClient ,
+    private val messageRepository: MessageRepository
 ) : ViewModel(){
 
     init {
         observeMessages()
     }
-    private val _listData : MutableMap<String ,MutableList<MessageData>> = mutableMapOf()
-    val listData = MutableSharedFlow< MutableMap<String ,MutableList<MessageData>> >()
+    private val _listData : MutableMap<String ,MutableList<Message>> = mutableMapOf()
+    val listData = MutableSharedFlow< MutableMap<String ,MutableList<Message>> >()
 
-    private val _newMessage = MutableSharedFlow<MessageData?>()
+    private val _newMessage = MutableSharedFlow<Message?>()
     val newMessage = _newMessage.asSharedFlow()
 
     fun registerClient(){
@@ -36,7 +34,8 @@ class MainViewModel @Inject constructor(
             amqpClient.registerChannel()
 
             amqpClient.consumeMessage("7") { m ->
-                viewModelScope.launch {
+                viewModelScope.launch(Dispatchers.IO) {
+                    messageRepository.insertMessageToDatabase(m!!)
                     _newMessage.emit(m)
                 }
             }
