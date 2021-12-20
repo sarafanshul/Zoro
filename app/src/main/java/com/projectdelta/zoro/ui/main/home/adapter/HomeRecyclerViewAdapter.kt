@@ -39,9 +39,9 @@ class HomeRecyclerViewAdapter(
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
                 tvSubTitle.setText(R.string.home)
-                if(user.messages != null){
+                if(user.messages > 0){
                     tvBadge.visibility = View.VISIBLE
-                    tvBadge.text = if (user.messages!! > 9) "9+" else user.messages.toString()
+                    tvBadge.text = if (user.messages > 9) "9+" else user.messages.toString()
                 }else{
                     tvBadge.visibility = View.GONE
                 }

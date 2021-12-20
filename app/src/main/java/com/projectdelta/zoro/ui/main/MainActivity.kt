@@ -1,6 +1,5 @@
 package com.projectdelta.zoro.ui.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
@@ -35,16 +34,11 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     }
 
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun registerObservers(){
         connectivityManager.isNetworkAvailable.observe(this){ isOnline ->
             when(isOnline){
-                true -> {
-                    viewModel.registerClient()
-                }
-                false -> {
-                    viewModel.unregisterClient()
-                }
+                true -> { viewModel.registerClient() }
+                false -> { viewModel.unregisterClient() }
             }
         }
 
@@ -57,8 +51,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))
                     .show()
         }
-
-        // TODO CHECK MAP IS REFERENCE OR COPY IN FLOW
     }
 
     private fun setupNavController(){

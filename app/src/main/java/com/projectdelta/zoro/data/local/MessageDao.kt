@@ -21,4 +21,7 @@ interface MessageDao {
     @Query("SELECT * FROM MESSAGE_TABLE WHERE seen =:seen")
     fun getAllMessagesFilteredBySeen(seen : Boolean) : Flow<List<Message>>
 
+    @Query("DELETE FROM MESSAGE_TABLE WHERE seen =:seen")
+    fun deleteAllMessagesFilteredBySeen(seen : Boolean)
+
 }

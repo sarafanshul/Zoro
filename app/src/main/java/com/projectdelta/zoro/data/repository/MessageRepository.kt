@@ -17,4 +17,6 @@ interface MessageRepository {
     suspend fun deleteMessageFromDatabase( message: Message )
 
     suspend fun getAllMessagesFilteredBySeen( isSeen : Boolean ) : Flow<List<Message>>
+
+    suspend fun deleteAllMessagesFilteredBySeen(isSeen: Boolean)
 }

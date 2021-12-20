@@ -71,4 +71,12 @@ class MessageRepositoryImpl (
 
         return dao.getAllMessagesFilteredBySeen(isSeen)
     }
+
+    @Throws(NotFound.ItsYourFaultIdiotException::class)
+    override suspend fun deleteAllMessagesFilteredBySeen(isSeen: Boolean) {
+        if(Thread.currentThread().equals( Looper.getMainLooper().thread))
+            throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION)
+
+        dao.deleteAllMessagesFilteredBySeen(isSeen)
+    }
 }

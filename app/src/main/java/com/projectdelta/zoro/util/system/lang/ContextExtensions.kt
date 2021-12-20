@@ -41,14 +41,14 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import com.projectdelta.zoro.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -438,4 +438,10 @@ fun <T> Fragment.collectLifecycleFlow(
             flow.collect(collect)
         }
     }
+}
+
+fun ViewModel.launchIO(
+    collect: suspend CoroutineScope.() -> Unit
+){
+    viewModelScope.launch(Dispatchers.IO , block = collect)
 }
