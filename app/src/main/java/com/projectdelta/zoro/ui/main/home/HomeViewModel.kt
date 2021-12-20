@@ -29,12 +29,13 @@ class HomeViewModel @Inject constructor(
 
     val userData = _friends.combine(_unreadMessages){fr ,data ->
         fr.forEach {
-            it.messages = 0
+            it.messagesCount = 0
         }
         data.forEach x@{ message ->
             fr.forEach y@{ f ->
                 if( f.id == message.senderId ){
-                    f.messages++
+                    f.messagesCount++
+                    f.lastMessage = message.data ?: ""
                     return@y
                 }
             }

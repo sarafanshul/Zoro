@@ -1,15 +1,16 @@
 package com.projectdelta.zoro.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.databinding.ActivityMainBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
-import com.projectdelta.zoro.util.system.lang.chop
-import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
-import com.projectdelta.zoro.util.system.lang.getResourceColor
+import com.projectdelta.zoro.util.NotFound
+import com.projectdelta.zoro.util.system.lang.*
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,11 +52,27 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))
                     .show()
         }
+
+        viewModel.bottomNavVisibility.observe(this, { integer: Int ->
+            when( integer ){
+                View.GONE -> binding.bottomPanel.slideDown()
+                View.VISIBLE -> binding.bottomPanel.slideUp()
+                else -> throw NotFound.TheFuckHappened("Only GONE & VISIBLE state supported!")
+            }
+        })
     }
 
     private fun setupNavController(){
         val navController = findNavController(R.id.nav_host_fragment)
         binding.bottomPanel.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener{ _ , destination : NavDestination , _ ->
+            if( destination.id in listOf( R.id.chatFragment ) ){
+                viewModel.hideBottomNav()
+            }else {
+                viewModel.showBottomNav()
+            }
+        }
     }
 
     private fun initUI(){

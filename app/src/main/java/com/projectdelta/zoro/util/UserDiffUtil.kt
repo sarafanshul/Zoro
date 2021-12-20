@@ -10,8 +10,8 @@ object UserDiffUtil : DiffUtil.ItemCallback<User>(){
     }
 
     override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-        Timber.d("areContentsTheSame : ${oldItem.name} :${oldItem.messages} , ${newItem.name} :${newItem.messages}")
+        Timber.d("areContentsTheSame : ${oldItem.name} :${oldItem.messagesCount} , ${newItem.name} :${newItem.messagesCount}")
         return oldItem.name == newItem.name &&
-                oldItem.messages == newItem.messages
+                oldItem.messagesCount == newItem.messagesCount
     }
 }

@@ -13,6 +13,7 @@ import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.ItemHomeBinding
 import com.projectdelta.zoro.util.UserDiffUtil
 import com.projectdelta.zoro.util.networking.NetworkingConstants
+import com.projectdelta.zoro.util.system.lang.chop
 
 class HomeRecyclerViewAdapter(
     private val onClickCallback : ( User ) -> Unit
@@ -38,10 +39,10 @@ class HomeRecyclerViewAdapter(
 
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
-                tvSubTitle.setText(R.string.home)
-                if(user.messages > 0){
+                tvSubTitle.text = user.lastMessage.chop(25)
+                if(user.messagesCount > 0){
                     tvBadge.visibility = View.VISIBLE
-                    tvBadge.text = if (user.messages > 9) "9+" else user.messages.toString()
+                    tvBadge.text = if (user.messagesCount > 9) "9+" else user.messagesCount.toString()
                 }else{
                     tvBadge.visibility = View.GONE
                 }

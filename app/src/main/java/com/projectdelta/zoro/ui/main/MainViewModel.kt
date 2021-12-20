@@ -1,5 +1,8 @@
 package com.projectdelta.zoro.ui.main
 
+import android.view.View
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.projectdelta.zoro.data.model.Message
@@ -20,6 +23,19 @@ class MainViewModel @Inject constructor(
 
     private val _newMessage = MutableSharedFlow<Message?>()
     val newMessage = _newMessage.asSharedFlow()
+
+    private val _bottomNavVisibility = MutableLiveData<Int>()
+
+    val bottomNavVisibility: LiveData<Int> = _bottomNavVisibility // FIXME change to Flows later
+
+    fun showBottomNav() {
+        _bottomNavVisibility.postValue(View.VISIBLE)
+    }
+
+    fun hideBottomNav() {
+        _bottomNavVisibility.postValue(View.GONE)
+    }
+
 
     fun registerClient(){
         viewModelScope.launch(Dispatchers.IO) {

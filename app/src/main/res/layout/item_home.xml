@@ -52,7 +52,7 @@
         android:layout_marginStart="10dp"
         android:background="@drawable/circle_bg"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="4dp"
         android:textColor="@color/black"
         android:padding="4dp"
