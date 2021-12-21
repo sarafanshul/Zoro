@@ -149,6 +149,7 @@ fun BottomNavigationView.slideDown(todoCallback: (() -> Unit)? = null){
         }
     }
 }
+
 fun BottomNavigationView.slideUp(todoCallback: (() -> Unit)? = null){
     if( translationY == height.toFloat() + marginBottom.toFloat() ){
         translationObjectY(height.toFloat() + marginBottom.toFloat(), 0f).apply {

@@ -53,13 +53,14 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     .show()
         }
 
-        viewModel.bottomNavVisibility.observe(this, { integer: Int ->
+        collectLatestLifecycleFlow(viewModel.bottomNavVisibility){ integer ->
             when( integer ){
                 View.GONE -> binding.bottomPanel.slideDown()
                 View.VISIBLE -> binding.bottomPanel.slideUp()
                 else -> throw NotFound.TheFuckHappened("Only GONE & VISIBLE state supported!")
             }
-        })
+        }
+
     }
 
     private fun setupNavController(){
