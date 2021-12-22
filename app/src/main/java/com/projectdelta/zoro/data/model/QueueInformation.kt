@@ -1,7 +1,5 @@
 package com.projectdelta.zoro.data.model
 
-import java.io.Serializable
-
 /**
  * Data object for Queue info.
  * @param name : Name of Queue as per Rabbit broker
@@ -10,4 +8,8 @@ import java.io.Serializable
 data class QueueInformation(
     val name : String,
     val routingKey : String
-) : Serializable
+) : BaseDataModel(){
+
+    override fun copy() =
+        QueueInformation(name, routingKey)
+}

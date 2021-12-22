@@ -6,6 +6,7 @@ import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.data.repository.UserRepository
+import com.projectdelta.zoro.util.system.lang.copy
 import com.projectdelta.zoro.util.system.lang.getValueOrNull
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,7 +46,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-        fr
+        fr.copy()
     }
 
     private fun getFriends(userId : String ){

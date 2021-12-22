@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.ItemHomeBinding
 import com.projectdelta.zoro.util.UserDiffUtil
 import com.projectdelta.zoro.util.networking.NetworkingConstants
 import com.projectdelta.zoro.util.system.lang.chop
+import com.projectdelta.zoro.util.system.lang.isOk
 
 class HomeRecyclerViewAdapter(
     private val onClickCallback : ( User ) -> Unit
@@ -39,7 +39,7 @@ class HomeRecyclerViewAdapter(
 
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
-                tvSubTitle.text = user.lastMessage.chop(25)
+                tvSubTitle.text = if(user.lastMessage.isOk()) user.lastMessage.chop(25) else "..."
                 if(user.messagesCount > 0){
                     tvBadge.visibility = View.VISIBLE
                     tvBadge.text = if (user.messagesCount > 9) "9+" else user.messagesCount.toString()

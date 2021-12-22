@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.FragmentHomeBinding
@@ -52,6 +55,11 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
         setSearchBar()
 
         binding.userRv.adapter = adapter
+        binding.userRv.addItemDecoration(
+            DividerItemDecoration(requireActivity() , LinearLayoutManager.VERTICAL ).apply {
+                setDrawable( ResourcesCompat.getDrawable(resources, R.drawable.item_rv_divider, null)!! )
+            }
+        )
     }
 
     private fun setSearchBar() {

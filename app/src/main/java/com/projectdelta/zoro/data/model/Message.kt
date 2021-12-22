@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.projectdelta.zoro.util.Constants.MESSAGE_TABLE
-import java.io.Serializable
 
 @Keep
 @Entity(tableName = MESSAGE_TABLE)
@@ -34,4 +33,9 @@ data class Message(
     @SerializedName("seen")
     var seen : Boolean = false
 
-) : Serializable
+) : BaseDataModel(){
+
+    override fun copy() =
+        Message(id, senderId, receiverId, data, time, seen)
+
+}
