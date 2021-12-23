@@ -23,9 +23,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
 
-    private var adapter : HomeRecyclerViewAdapter? = null
+    private var adapter: HomeRecyclerViewAdapter? = null
 
-    private val viewModel : HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,11 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
         viewModel.updateQuery("")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        c: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
@@ -51,22 +55,29 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
 
     }
 
-    private fun initUI(){
+    private fun initUI() {
         setSearchBar()
 
         binding.userRv.adapter = adapter
         binding.userRv.addItemDecoration(
-            DividerItemDecoration(requireActivity() , LinearLayoutManager.VERTICAL ).apply {
-                setDrawable( ResourcesCompat.getDrawable(resources, R.drawable.item_rv_divider, null)!! )
+            DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL).apply {
+                setDrawable(
+                    ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.item_rv_divider,
+                        null
+                    )!!
+                )
             }
         )
     }
 
     private fun setSearchBar() {
-        val searchView : SearchView? = binding.toolbar.menu.findItem(R.id.action_search).actionView as SearchView?
+        val searchView: SearchView? =
+            binding.toolbar.menu.findItem(R.id.action_search).actionView as SearchView?
         searchView?.queryHint = "Contact name..."
 
-        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
                 return false
@@ -79,13 +90,13 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
         })
     }
 
-    private fun registerObservers(){
-        collectLatestLifecycleFlow(viewModel.userData){
+    private fun registerObservers() {
+        collectLatestLifecycleFlow(viewModel.userData) {
             adapter?.submitList(it)
         }
     }
 
-    private fun navigateChatFragment( user : User ) {
+    private fun navigateChatFragment(user: User) {
         val action = HomeFragmentDirections
             .actionHomeFragmentToChatFragment(user)
         safeNavigate(action)

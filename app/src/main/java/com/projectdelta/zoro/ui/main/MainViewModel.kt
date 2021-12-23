@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val amqpClient: AMQPClient ,
+    private val amqpClient: AMQPClient,
     private val messageRepository: MessageRepository
-) : ViewModel(){
+) : ViewModel() {
 
     private val _newMessage = MutableSharedFlow<Message?>()
     val newMessage = _newMessage.asSharedFlow()
@@ -34,12 +34,12 @@ class MainViewModel @Inject constructor(
     }
 
     fun hideBottomNav() {
-        launchIO{
+        launchIO {
             _bottomNavVisibility.emit(View.GONE)
         }
     }
 
-    fun registerClient(){
+    fun registerClient() {
         viewModelScope.launch(Dispatchers.IO) {
             amqpClient.registerChannel()
 
@@ -52,7 +52,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun unregisterClient(){
+    fun unregisterClient() {
         viewModelScope.launch(Dispatchers.IO) {
             amqpClient.unregisterChannel()
         }

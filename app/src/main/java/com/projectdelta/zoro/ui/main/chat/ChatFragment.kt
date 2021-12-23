@@ -14,12 +14,12 @@ import timber.log.Timber
 @AndroidEntryPoint
 class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
-    lateinit var receiver : User
+    lateinit var receiver: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val args : ChatFragmentArgs by navArgs()
+        val args: ChatFragmentArgs by navArgs()
         receiver = args.receiver
     }
 

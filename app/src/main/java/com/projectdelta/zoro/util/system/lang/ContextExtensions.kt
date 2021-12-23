@@ -276,7 +276,7 @@ fun Context.isServiceRunning(serviceClass: Class<*>): Boolean {
 /**
  * Returns if a network connection is available or not. [For more info](https://stackoverflow.com/a/58605532)
  */
-@Suppress("DEPRECATION" ,"ObsoleteSdkInt")
+@Suppress("DEPRECATION", "ObsoleteSdkInt")
 fun Context.isOnline(): Boolean {
     val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -298,7 +298,7 @@ fun Context.isOnline(): Boolean {
 /**
  * Returns the theme resources
  */
-@Deprecated("returns faded color", ReplaceWith("Context.getResourceColor") ,DeprecationLevel.ERROR)
+@Deprecated("returns faded color", ReplaceWith("Context.getResourceColor"), DeprecationLevel.ERROR)
 fun Context.getColorFromAttr(
     @AttrRes attrColor: Int,
     typedValue: TypedValue = TypedValue(),
@@ -404,10 +404,10 @@ fun Fragment.safeNavigate(directions: NavDirections) {
  * Wrapper for observing **Latest** Flows in a lifecycle aware state in an activity.
  */
 fun <T> AppCompatActivity.collectLatestLifecycleFlow(
-    flow : Flow<T>, collect : suspend (T) -> Unit
+    flow: Flow<T>, collect: suspend (T) -> Unit
 ) {
     lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED){
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
             flow.collectLatest(collect)
         }
     }
@@ -418,10 +418,10 @@ fun <T> AppCompatActivity.collectLatestLifecycleFlow(
  * [Refer this for more](https://medium.com/androiddevelopers/a-safer-way-to-collect-flows-from-android-uis-23080b1f8bda)
  */
 fun <T> Fragment.collectLatestLifecycleFlow(
-    flow : Flow<T>, collect : suspend (T) -> Unit
+    flow: Flow<T>, collect: suspend (T) -> Unit
 ) {
     viewLifecycleOwner.lifecycleScope.launch {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             flow.collectLatest(collect)
         }
     }
@@ -431,10 +431,10 @@ fun <T> Fragment.collectLatestLifecycleFlow(
  * Wrapper for observing Flows in a lifecycle aware state in an Fragment.
  */
 fun <T> Fragment.collectLifecycleFlow(
-    flow : Flow<T>, collect : suspend (T) -> Unit
+    flow: Flow<T>, collect: suspend (T) -> Unit
 ) {
     viewLifecycleOwner.lifecycleScope.launch {
-        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             flow.collect(collect)
         }
     }
@@ -442,6 +442,6 @@ fun <T> Fragment.collectLifecycleFlow(
 
 fun ViewModel.launchIO(
     collect: suspend CoroutineScope.() -> Unit
-){
-    viewModelScope.launch(Dispatchers.IO , block = collect)
+) {
+    viewModelScope.launch(Dispatchers.IO, block = collect)
 }

@@ -15,9 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
 
-    private val viewModel : UserViewModel by viewModels()
+    private val viewModel: UserViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        c: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentUserBinding.inflate(inflater)
         return binding.root
     }
@@ -29,8 +33,8 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
 
     }
 
-    private fun registerObservers(){
-        collectLatestLifecycleFlow(viewModel.userPreferences){
+    private fun registerObservers() {
+        collectLatestLifecycleFlow(viewModel.userPreferences) {
             Glide
                 .with(binding.root.context)
                 .load(NetworkingConstants.getAvatarURIByUserId(it.userId))

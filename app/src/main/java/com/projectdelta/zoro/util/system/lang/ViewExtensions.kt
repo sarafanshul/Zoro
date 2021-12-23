@@ -108,7 +108,12 @@ fun <T : RecyclerView> T.removeItemDecorations() {
  * [Source](https://stackoverflow.com/a/59652513/11718077)
  */
 @Suppress("DEPRECATION")
-fun TextView.leftDrawable(@DrawableRes id: Int = 0, @DimenRes sizeRes: Int = 0, @ColorInt color: Int = 0, @ColorRes colorRes: Int = 0) {
+fun TextView.leftDrawable(
+    @DrawableRes id: Int = 0,
+    @DimenRes sizeRes: Int = 0,
+    @ColorInt color: Int = 0,
+    @ColorRes colorRes: Int = 0
+) {
     val drawable = ContextCompat.getDrawable(context, id)
     if (sizeRes != 0) {
         val size = resources.getDimensionPixelSize(sizeRes)
@@ -132,7 +137,7 @@ fun View.translationObjectY(
     startY: Float,
     endY: Float,
     duration: Long = 200L
-) : ObjectAnimator {
+): ObjectAnimator {
     return ObjectAnimator.ofFloat(this, "translationY", startY, endY).apply {
         this.duration = duration
         interpolator = LinearOutSlowInInterpolator()
@@ -140,18 +145,18 @@ fun View.translationObjectY(
     }
 }
 
-fun BottomNavigationView.slideDown(todoCallback: (() -> Unit)? = null){
+fun BottomNavigationView.slideDown(todoCallback: (() -> Unit)? = null) {
     if (translationY == 0f) {
         translationObjectY(0f, height.toFloat() + marginBottom.toFloat()).apply {
-            doOnEnd{
+            doOnEnd {
                 todoCallback?.invoke()
             }
         }
     }
 }
 
-fun BottomNavigationView.slideUp(todoCallback: (() -> Unit)? = null){
-    if( translationY == height.toFloat() + marginBottom.toFloat() ){
+fun BottomNavigationView.slideUp(todoCallback: (() -> Unit)? = null) {
+    if (translationY == height.toFloat() + marginBottom.toFloat()) {
         translationObjectY(height.toFloat() + marginBottom.toFloat(), 0f).apply {
             doOnEnd {
                 todoCallback?.invoke()

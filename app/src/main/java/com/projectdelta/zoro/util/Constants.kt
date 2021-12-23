@@ -22,10 +22,12 @@ object Constants {
     const val TRANSITION_EPISODE = "episode_transition_"
 
     // User
-    fun generateUniqueUserId() : String =
+    fun generateUniqueUserId(): String =
         UUID.randomUUID().toString()
 
     // Database
     const val DATABASE_NAME = "zoro_database"
     const val MESSAGE_TABLE = "message_table"
+
+    const val WRONG_THREAD_EXCEPTION_IO = "Wrong Method Exception, (Required IO thread)"
 }

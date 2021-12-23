@@ -4,6 +4,6 @@ import java.io.Serializable
 
 abstract class BaseDataModel : Serializable {
 
-    abstract fun copy() : BaseDataModel
+    abstract fun copy(): BaseDataModel
 
 }

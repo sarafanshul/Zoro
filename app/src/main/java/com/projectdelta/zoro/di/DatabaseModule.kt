@@ -15,7 +15,7 @@ object DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideMessageDatabase( application: Application ) : MessageDao{
+    fun provideMessageDatabase(application: Application): MessageDao {
         return MessageDatabase.getInstance(application).messageDao()
     }
 }

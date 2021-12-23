@@ -33,13 +33,13 @@ class HomeViewModel @Inject constructor(
 
     private val _searchChanel = MutableStateFlow("")
 
-    val userData = _friends.combine(_unreadMessages){fr ,data ->
+    val userData = _friends.combine(_unreadMessages) { fr, data ->
         fr.forEach {
             it.messagesCount = 0
         }
         data.forEach x@{ message ->
             fr.forEach y@{ f ->
-                if( f.id == message.senderId ){
+                if (f.id == message.senderId) {
                     f.messagesCount++
                     f.lastMessage = message.data ?: ""
                     return@y
@@ -49,23 +49,23 @@ class HomeViewModel @Inject constructor(
         fr.copy()
     }
 
-    private fun getFriends(userId : String ){
-        launchIO{
+    private fun getFriends(userId: String) {
+        launchIO {
             val data = userRepository.getFriends(userId)
             _apiResponse.emit(data)
             observeSearch() // because we do not observe value of _apiResponse
         }
     }
 
-    private fun getUnreadMessages(){
-        launchIO{
+    private fun getUnreadMessages() {
+        launchIO {
             messageRepository.getAllMessagesFilteredBySeen(false).collectLatest {
                 _unreadMessages.emit(it)
             }
         }
     }
 
-    private fun getPreferences(){
+    private fun getPreferences() {
         launchIO {
             preferencesManager.preferenceFlow.collectLatest { pref ->
 //                getFriends(pref.userId)
@@ -76,7 +76,7 @@ class HomeViewModel @Inject constructor(
 
     fun updateQuery(query: String) {
         launchIO {
-            _searchChanel.emit( query )
+            _searchChanel.emit(query)
         }
     }
 
@@ -85,7 +85,7 @@ class HomeViewModel @Inject constructor(
             _searchChanel.collectLatest { query ->
                 Timber.d("Search Query : $query")
                 val newData = _apiResponse.getValueOrNull()?.filter { user ->
-                    user.name?.contains(query ,ignoreCase = true) ?: false
+                    user.name?.contains(query, ignoreCase = true) ?: false
                 } ?: listOf()
                 Timber.d(newData.toString())
                 launchIO {

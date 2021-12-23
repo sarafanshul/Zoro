@@ -10,8 +10,8 @@ object NotFound {
 
     fun surpriseMe() = TextOnlyEmoticons.random()
 
-    class TheFuckHappened( why : String = "" ) : IllegalStateException(why)
+    class TheFuckHappened(why: String = "") : IllegalStateException(why)
 
-    class ItsYourFaultIdiotException( why : String = "" ) : IllegalAccessException(why)
+    class ItsYourFaultIdiotException(why: String = "") : IllegalAccessException(why)
 
 }

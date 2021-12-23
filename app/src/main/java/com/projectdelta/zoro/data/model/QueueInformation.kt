@@ -6,9 +6,9 @@ package com.projectdelta.zoro.data.model
  * @param routingKey : Routing Key of Queue.
  */
 data class QueueInformation(
-    val name : String,
-    val routingKey : String
-) : BaseDataModel(){
+    val name: String,
+    val routingKey: String
+) : BaseDataModel() {
 
     override fun copy() =
         QueueInformation(name, routingKey)

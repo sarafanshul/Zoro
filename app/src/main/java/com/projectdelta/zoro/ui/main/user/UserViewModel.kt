@@ -12,6 +12,6 @@ class UserViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
-    val userPreferences : Flow<UserPreferences>
+    val userPreferences: Flow<UserPreferences>
         get() = preferencesManager.preferenceFlow
 }

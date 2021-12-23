@@ -8,5 +8,5 @@ interface AMQPClient {
 
     fun unregisterChannel()
 
-    fun consumeMessage( queue : String , doSomething : (m : Message?) -> Unit )
+    fun consumeMessage(queue: String, doSomething: (m: Message?) -> Unit)
 }

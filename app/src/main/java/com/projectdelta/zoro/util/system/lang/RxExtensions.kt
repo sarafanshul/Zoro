@@ -41,6 +41,6 @@ fun <T> Flow<T>.getValueBlockedOrNull(): T? {
     return value
 }
 
-suspend fun <T> Flow<T>.getValueOrNull() : T? {
+suspend fun <T> Flow<T>.getValueOrNull(): T? {
     return this.firstOrNull()
 }

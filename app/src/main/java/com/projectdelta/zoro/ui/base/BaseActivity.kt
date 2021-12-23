@@ -16,18 +16,18 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     private val connectivityManagerHiltEntryPoint: NetworkModule.ConnectivityManagerProviderEntryPoint by lazy {
         EntryPointAccessors.fromApplication(
-            applicationContext ,
+            applicationContext,
             NetworkModule.ConnectivityManagerProviderEntryPoint::class.java
         )
     }
     private val preferencesManagerHiltEntryPoint: PreferencesModule.PreferenceManagerProviderEntryPoint by lazy {
         EntryPointAccessors.fromApplication(
-            applicationContext ,
+            applicationContext,
             PreferencesModule.PreferenceManagerProviderEntryPoint::class.java
         )
     }
 
-    lateinit var connectivityManager : ConnectivityManager
+    lateinit var connectivityManager: ConnectivityManager
     lateinit var preferenceManager: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

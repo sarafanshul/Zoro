@@ -35,16 +35,20 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     }
 
-    private fun registerObservers(){
-        connectivityManager.isNetworkAvailable.observe(this){ isOnline ->
-            when(isOnline){
-                true -> { viewModel.registerClient() }
-                false -> { viewModel.unregisterClient() }
+    private fun registerObservers() {
+        connectivityManager.isNetworkAvailable.observe(this) { isOnline ->
+            when (isOnline) {
+                true -> {
+                    viewModel.registerClient()
+                }
+                false -> {
+                    viewModel.unregisterClient()
+                }
             }
         }
 
-        collectLatestLifecycleFlow(viewModel.newMessage){
-            if( it != null )
+        collectLatestLifecycleFlow(viewModel.newMessage) {
+            if (it != null)
                 Alerter.create(this@MainActivity)
                     .setTitle("New Message from ${it.senderId?.chop(20)}")
                     .setText(it.data!!)
@@ -53,8 +57,8 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                     .show()
         }
 
-        collectLatestLifecycleFlow(viewModel.bottomNavVisibility){ integer ->
-            when( integer ){
+        collectLatestLifecycleFlow(viewModel.bottomNavVisibility) { integer ->
+            when (integer) {
                 View.GONE -> binding.bottomPanel.slideDown()
                 View.VISIBLE -> binding.bottomPanel.slideUp()
                 else -> throw NotFound.TheFuckHappened("Only GONE & VISIBLE state supported!")
@@ -63,20 +67,20 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     }
 
-    private fun setupNavController(){
+    private fun setupNavController() {
         val navController = findNavController(R.id.nav_host_fragment)
         binding.bottomPanel.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener{ _ , destination : NavDestination , _ ->
-            if( destination.id in listOf( R.id.chatFragment ) ){
+        navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            if (destination.id in listOf(R.id.chatFragment)) {
                 viewModel.hideBottomNav()
-            }else {
+            } else {
                 viewModel.showBottomNav()
             }
         }
     }
 
-    private fun initUI(){
+    private fun initUI() {
 
     }
 

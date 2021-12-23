@@ -13,7 +13,7 @@ object UtilModule {
 
     @Singleton
     @Provides
-    fun provideSerializer() : Gson {
+    fun provideSerializer(): Gson {
         return Gson()
     }
 }

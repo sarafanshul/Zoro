@@ -17,17 +17,17 @@ interface UserApi {
 
     @GET(USER_URL + SUB_URL_GET)
     suspend fun getUserById(
-        @Query(QUERY_ID) userId : String
-    ) : ApiResult<User?>
+        @Query(QUERY_ID) userId: String
+    ): ApiResult<User?>
 
     @POST(USER_URL + SUB_URL_ADD_USER)
     suspend fun updateUser(
-        @Body user : User
-    ) : ApiResult<User?>
+        @Body user: User
+    ): ApiResult<User?>
 
     @GET(USER_URL + SUB_URL_FRIENDS)
     suspend fun getFriends(
         @Query(QUERY_USER_ID) userId: String
-    ) : ApiResult<List<User>?>
+    ): ApiResult<List<User>?>
 
 }

@@ -20,29 +20,29 @@ class PreferencesManager(
     private val context: Context
 ) {
 
-    val preferenceFlow : Flow<UserPreferences>
+    val preferenceFlow: Flow<UserPreferences>
         get() = context.dataStore.data
             .catch { exception ->
-                if( exception is IOException ){
-                    Timber.e(exception ,"Error reading exception")
-                    emit( emptyPreferences() )
+                if (exception is IOException) {
+                    Timber.e(exception, "Error reading exception")
+                    emit(emptyPreferences())
                 } else {
                     throw exception
                 }
             }
             .map { preferences ->
-                val userId : String = preferences[PreferenceKeys.USER_ID] ?: ""
-                val firstLogin : Boolean = preferences[PreferenceKeys.FIRST_LOGIN] ?: true
+                val userId: String = preferences[PreferenceKeys.USER_ID] ?: ""
+                val firstLogin: Boolean = preferences[PreferenceKeys.FIRST_LOGIN] ?: true
                 UserPreferences(userId, firstLogin)
             }
 
-    suspend fun updateUserId( id : String ){
+    suspend fun updateUserId(id: String) {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.USER_ID] = id
         }
     }
 
-    suspend fun updateFirstLogin(status : Boolean ){
+    suspend fun updateFirstLogin(status: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.FIRST_LOGIN] = status
         }

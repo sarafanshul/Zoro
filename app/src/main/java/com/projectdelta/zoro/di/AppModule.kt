@@ -15,7 +15,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApplication( @ApplicationContext app : Context ) : ZoroApplication =
+    fun provideApplication(@ApplicationContext app: Context): ZoroApplication =
         app as ZoroApplication
 
 }

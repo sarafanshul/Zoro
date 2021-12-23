@@ -16,15 +16,15 @@ import com.projectdelta.zoro.util.system.lang.chop
 import com.projectdelta.zoro.util.system.lang.isOk
 
 class HomeRecyclerViewAdapter(
-    private val onClickCallback : ( User ) -> Unit
-) : ListAdapter<User ,HomeRecyclerViewAdapter.ViewHolder>(UserDiffUtil) {
+    private val onClickCallback: (User) -> Unit
+) : ListAdapter<User, HomeRecyclerViewAdapter.ViewHolder>(UserDiffUtil) {
 
     inner class ViewHolder(
-        private val binding : ItemHomeBinding
-    ) : RecyclerView.ViewHolder(binding.root){
+        private val binding: ItemHomeBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind( user : User , onClickCallback : ( User ) -> Unit ){
-            with(binding){
+        fun bind(user: User, onClickCallback: (User) -> Unit) {
+            with(binding) {
                 val context = root.context
 
                 root.setOnClickListener {
@@ -39,11 +39,12 @@ class HomeRecyclerViewAdapter(
 
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
-                tvSubTitle.text = if(user.lastMessage.isOk()) user.lastMessage.chop(25) else "..."
-                if(user.messagesCount > 0){
+                tvSubTitle.text = if (user.lastMessage.isOk()) user.lastMessage.chop(25) else "..."
+                if (user.messagesCount > 0) {
                     tvBadge.visibility = View.VISIBLE
-                    tvBadge.text = if (user.messagesCount > 9) "9+" else user.messagesCount.toString()
-                }else{
+                    tvBadge.text =
+                        if (user.messagesCount > 9) "9+" else user.messagesCount.toString()
+                } else {
                     tvBadge.visibility = View.GONE
                 }
             }
@@ -56,6 +57,6 @@ class HomeRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind( getItem(position) , onClickCallback )
+        holder.bind(getItem(position), onClickCallback)
     }
 }

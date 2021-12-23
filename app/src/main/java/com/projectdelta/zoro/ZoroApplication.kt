@@ -7,7 +7,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class ZoroApplication : Application(){
+class ZoroApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

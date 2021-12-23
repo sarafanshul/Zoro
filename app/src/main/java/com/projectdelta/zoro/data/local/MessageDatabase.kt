@@ -18,31 +18,31 @@ import java.util.concurrent.Executors
 )
 abstract class MessageDatabase : RoomDatabase() {
 
-    abstract fun messageDao() : MessageDao
+    abstract fun messageDao(): MessageDao
 
-    companion object{
+    companion object {
 
         @Volatile
-        private var INSTANCE : MessageDatabase? = null
+        private var INSTANCE: MessageDatabase? = null
 
-        fun getInstance(application: Application) : MessageDatabase{
+        fun getInstance(application: Application): MessageDatabase {
             val tempInstance = INSTANCE
-            if( tempInstance != null )
+            if (tempInstance != null)
                 return tempInstance
 
-            synchronized(this){
+            synchronized(this) {
                 val instance = buildDatabase(application)
                 INSTANCE = instance
                 return instance
             }
         }
 
-        private fun buildDatabase(application: Application): MessageDatabase{
+        private fun buildDatabase(application: Application): MessageDatabase {
             return Room.databaseBuilder(
-                application ,
-                MessageDatabase::class.java ,
+                application,
+                MessageDatabase::class.java,
                 DATABASE_NAME
-            ).addCallback( object : RoomDatabase.Callback(){
+            ).addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     Executors.newSingleThreadExecutor().execute {

@@ -17,11 +17,11 @@ interface MessageApi {
     @POST(MESSAGE_URL + SUB_URL_SEND)
     suspend fun sendMessage(
         @Body message: Message
-    ) : ApiResult<QueueInformation?>
+    ): ApiResult<QueueInformation?>
 
     @GET(MESSAGE_URL + SUB_URL_COUNT)
     suspend fun getMessageCount(
-        @Query(QUERY_QUEUE) queueName : String
-    ) : ApiResult<Int?>
+        @Query(QUERY_QUEUE) queueName: String
+    ): ApiResult<Int?>
 
 }

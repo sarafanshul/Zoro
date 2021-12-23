@@ -20,14 +20,14 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideMessageRepository(
-        api : MessageApi ,messageDao: MessageDao
-    ) : MessageRepository{
-        return MessageRepositoryImpl(api , messageDao)
+        api: MessageApi, messageDao: MessageDao
+    ): MessageRepository {
+        return MessageRepositoryImpl(api, messageDao)
     }
 
     @Singleton
     @Provides
-    fun provideUserRepository( api : UserApi ) : UserRepository{
+    fun provideUserRepository(api: UserApi): UserRepository {
         return UserRepositoryImpl(api)
     }
 

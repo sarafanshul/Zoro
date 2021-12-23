@@ -4,7 +4,7 @@ object NetworkingConstants {
 
     // Avatar API
     private const val AVATAR_API = "https://avatars.dicebear.com/api/adventurer/"
-    fun getAvatarURIByUserId( userId : String ) : String =
+    fun getAvatarURIByUserId(userId: String): String =
         "$AVATAR_API$userId.png"
 
     // RabbitMQ API

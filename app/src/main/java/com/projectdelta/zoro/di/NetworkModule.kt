@@ -70,12 +70,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideAMQPClient( gson: Gson ) : AMQPClient {
+    fun provideAMQPClient(gson: Gson): AMQPClient {
         return RabbitMQClient.getInstance(
-            host = RABBIT_API ,
-            port = RABBIT_PORT ,
-            uName = RABBIT_USER_NAME ,
-            password = RABBIT_USER_PASSWORD ,
+            host = RABBIT_API,
+            port = RABBIT_PORT,
+            uName = RABBIT_USER_NAME,
+            password = RABBIT_USER_PASSWORD,
             deserializer = gson
         )
     }
@@ -92,7 +92,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMessageApiService( retrofitBuilder : Retrofit.Builder ) : MessageApi{
+    fun provideMessageApiService(retrofitBuilder: Retrofit.Builder): MessageApi {
         return retrofitBuilder
             .build()
             .create(MessageApi::class.java)
@@ -100,7 +100,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideUserApiService( retrofitBuilder : Retrofit.Builder ) : UserApi{
+    fun provideUserApiService(retrofitBuilder: Retrofit.Builder): UserApi {
         return retrofitBuilder
             .build()
             .create(UserApi::class.java)
