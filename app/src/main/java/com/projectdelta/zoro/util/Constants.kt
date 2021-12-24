@@ -10,6 +10,8 @@ object Constants {
     const val READ_TIMEOUT = 10L
     const val WRITE_TIMEOUT = 10L
 
+    const val ALERT_NOTIFICATION_DURATION = 2500L
+
     // Drawables
     // threshold for when contents of collapsing toolbar is hidden
     const val COLLAPSING_TOOLBAR_VISIBILITY_THRESHOLD = -150

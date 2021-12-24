@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.databinding.ActivityMainBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
+import com.projectdelta.zoro.util.Constants.ALERT_NOTIFICATION_DURATION
 import com.projectdelta.zoro.util.NotFound
 import com.projectdelta.zoro.util.system.lang.*
 import com.tapadoo.alerter.Alerter
@@ -52,7 +53,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 Alerter.create(this@MainActivity)
                     .setTitle("New Message from ${it.senderId?.chop(20)}")
                     .setText(it.data!!)
-                    .setDuration(5000L)
+                    .setDuration(ALERT_NOTIFICATION_DURATION)
                     .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))
                     .show()
         }

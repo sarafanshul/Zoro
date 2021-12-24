@@ -5,12 +5,16 @@ package com.projectdelta.zoro.util.system.lang
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.*
 import androidx.core.animation.doOnEnd
@@ -19,7 +23,11 @@ import androidx.core.view.marginBottom
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.projectdelta.zoro.util.networking.NetworkingConstants
 
 fun View.changeColor(newColor: Int) {
     setBackgroundColor(
@@ -195,4 +203,29 @@ fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.updateList(list: List<T
     //      return;
     //  }
     this.submitList(if (list == this.currentList) list.toList() else list)
+}
+
+/**
+ * Loads profile-image into ImageView and SubClasses using Glide
+ */
+fun loadUserProfileImage(view : ImageView ,userId :String) =
+    Glide
+        .with(view.context)
+        .load(NetworkingConstants.getAvatarURIByUserId(userId))
+        .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA))
+        .into(view)
+
+/**
+ * Converts a drawable to [Bitmap] object
+ */
+fun Drawable.convertToBitmap(): Bitmap {
+    val bitmap = Bitmap.createBitmap(
+        intrinsicWidth,
+        intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    setBounds(0, 0, canvas.width, canvas.height)
+    draw(canvas)
+    return bitmap
 }

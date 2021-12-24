@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -13,9 +14,7 @@ import com.projectdelta.zoro.databinding.FragmentChatBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
 import com.projectdelta.zoro.ui.main.MainViewModel
 import com.projectdelta.zoro.ui.main.chat.adapter.ChatRecyclerAdapter
-import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
-import com.projectdelta.zoro.util.system.lang.isOk
-import com.projectdelta.zoro.util.system.lang.toEditable
+import com.projectdelta.zoro.util.system.lang.*
 import com.projectdelta.zoro.util.widget.SpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -37,6 +36,8 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
         receiver = args.receiver
 
         viewModel.getReceiverUserData(receiver.id!!)
+
+        activityViewModel.currentChatReceiver = receiver.id!!
 
         adapter = ChatRecyclerAdapter{ m ,c ->
             Timber.d("${m.data} : ${c.name}")
@@ -62,19 +63,36 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
         binding.rvChat.addItemDecoration(SpaceItemDecoration(8))
 
-        binding.ivSend.setOnClickListener {
-            val text = binding.tvSend.text.toString()
-            if( text.isOk() ) {
-                val message = Message(
-                    receiverId = receiver.id,
-                    senderId = "7",
-                    data = text,
-                    time = System.currentTimeMillis(),
-                    type = Message.Companion.MessageType.OUTGOING
-                )
-                viewModel.sendMessage(message)
-                binding.tvSend.text = "".toEditable()
+        binding.tvSend.setOnEditorActionListener { v, actionId, _ ->
+            var handled = false
+            if( actionId == EditorInfo.IME_ACTION_SEND ){
+                sendMessage(v.text.toString())
+                handled = true
             }
+            handled
+        }
+
+        binding.ivBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+        loadUserProfileImage(binding.ivUser ,receiver.id!!)
+
+        binding.tvUser.text = receiver.name?.chop(25)
+
+    }
+
+    private fun sendMessage( text : String? ){
+        if( text.isOk() ) {
+            val message = Message(
+                receiverId = receiver.id,
+                senderId = "7",
+                data = text,
+                time = System.currentTimeMillis(),
+                type = Message.Companion.MessageType.OUTGOING
+            )
+            viewModel.sendMessage(message)
+            binding.tvSend.text = "".toEditable()
         }
     }
 
@@ -91,6 +109,7 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
     override fun onDestroy() {
         adapter = null
+        activityViewModel.currentChatReceiver = ""
         activityViewModel.setMessagesSeen(receiver.id!!)
         super.onDestroy()
     }

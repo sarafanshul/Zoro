@@ -21,6 +21,9 @@ class MainViewModel @Inject constructor(
     private val messageRepository: MessageRepository
 ) : ViewModel() {
 
+    @Volatile
+    var currentChatReceiver = ""
+
     private val _newMessage = MutableSharedFlow<Message?>()
     val newMessage = _newMessage.asSharedFlow()
 
@@ -47,7 +50,8 @@ class MainViewModel @Inject constructor(
             amqpClient.consumeMessage("7") { m ->
                 viewModelScope.launch(Dispatchers.IO) {
                     messageRepository.insertMessageToDatabase(m!!)
-                    _newMessage.emit(m)
+                    if( m.senderId != currentChatReceiver ) // don't fire while in room with same user
+                        _newMessage.emit(m)
                 }
             }
         }
@@ -61,7 +65,7 @@ class MainViewModel @Inject constructor(
 
     fun setMessagesSeen( userId : String ){
         launchIO {
-            messageRepository.getAllMessagesFilteredBySeenAndSenderOffline(userId ,false).forEach {it ->
+            messageRepository.getAllMessagesFilteredBySeenAndSenderOffline(userId ,false).forEach {
                 it.seen = true
                 launchIO {
                     Timber.d("updated!")

@@ -5,15 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.ItemHomeBinding
 import com.projectdelta.zoro.util.callback.UserDiffUtilCallback
-import com.projectdelta.zoro.util.networking.NetworkingConstants
 import com.projectdelta.zoro.util.system.lang.chop
 import com.projectdelta.zoro.util.system.lang.isOk
+import com.projectdelta.zoro.util.system.lang.loadUserProfileImage
 
 class HomeRecyclerViewAdapter(
     private val onClickCallback: (User) -> Unit
@@ -25,17 +22,12 @@ class HomeRecyclerViewAdapter(
 
         fun bind(user: User, onClickCallback: (User) -> Unit) {
             with(binding) {
-                val context = root.context
 
                 root.setOnClickListener {
                     onClickCallback(user)
                 }
 
-                Glide
-                    .with(context)
-                    .load(NetworkingConstants.getAvatarURIByUserId(user.id!!))
-                    .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA))
-                    .into(ivUser)
+                loadUserProfileImage(ivUser ,user.id!!)
 
                 tvTitle.text = user.name
                 tvTitle.isSelected = true
