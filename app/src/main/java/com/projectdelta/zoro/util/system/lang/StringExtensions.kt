@@ -2,6 +2,7 @@
 
 package com.projectdelta.zoro.util.system.lang
 
+import android.text.Editable
 import java.util.*
 
 fun String.chop(count: Int, replacement: String = "..."): String {
@@ -29,3 +30,9 @@ fun String.capitalized(): String {
 fun String?.isOk(): Boolean {
     return !(this.isNullOrBlank() || this.isNullOrEmpty())
 }
+
+/**
+ * Converts [String] to [Editable] for using in EditTexts.
+ */
+fun String.toEditable(): Editable =
+    Editable.Factory.getInstance().newEditable(this)

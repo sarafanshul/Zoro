@@ -42,6 +42,13 @@ abstract class MessageDao {
     ): Flow<List<Message>> =
         getAllMessagesFilteredBySeenAndSenderBase(senderId, seen).distinctUntilChanged()
 
+    @Query("SELECT * FROM MESSAGE_TABLE WHERE seen =:seen AND senderId =:senderId")
+    abstract fun getAllMessagesFilteredBySeenAndSenderOffline(
+        senderId: String,
+        seen: Boolean
+    ) : List<Message>
+
+
     @Query("DELETE FROM MESSAGE_TABLE WHERE seen =:seen")
     abstract fun deleteAllMessagesFilteredBySeen(seen: Boolean)
 

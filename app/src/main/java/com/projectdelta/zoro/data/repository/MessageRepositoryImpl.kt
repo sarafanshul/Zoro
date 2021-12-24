@@ -80,6 +80,16 @@ class MessageRepositoryImpl(
         return dao.getAllMessagesFilteredBySeenAndSender(senderId, seen)
     }
 
+    override suspend fun getAllMessagesFilteredBySeenAndSenderOffline(
+        senderId: String,
+        seen: Boolean
+    ): List<Message> {
+        if (Thread.currentThread().equals(Looper.getMainLooper().thread))
+            throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)
+
+        return dao.getAllMessagesFilteredBySeenAndSenderOffline(senderId, seen)
+    }
+
     @Throws(NotFound.ItsYourFaultIdiotException::class)
     override suspend fun deleteAllMessagesFilteredBySeen(isSeen: Boolean) {
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))

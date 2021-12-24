@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,6 +56,18 @@ class MainViewModel @Inject constructor(
     fun unregisterClient() {
         viewModelScope.launch(Dispatchers.IO) {
             amqpClient.unregisterChannel()
+        }
+    }
+
+    fun setMessagesSeen( userId : String ){
+        launchIO {
+            messageRepository.getAllMessagesFilteredBySeenAndSenderOffline(userId ,false).forEach {it ->
+                it.seen = true
+                launchIO {
+                    Timber.d("updated!")
+                    messageRepository.updateMessageToDatabase(it)
+                }
+            }
         }
     }
 

@@ -10,14 +10,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.ItemHomeBinding
-import com.projectdelta.zoro.util.UserDiffUtil
+import com.projectdelta.zoro.util.callback.UserDiffUtilCallback
 import com.projectdelta.zoro.util.networking.NetworkingConstants
 import com.projectdelta.zoro.util.system.lang.chop
 import com.projectdelta.zoro.util.system.lang.isOk
 
 class HomeRecyclerViewAdapter(
     private val onClickCallback: (User) -> Unit
-) : ListAdapter<User, HomeRecyclerViewAdapter.ViewHolder>(UserDiffUtil) {
+) : ListAdapter<User, HomeRecyclerViewAdapter.ViewHolder>(UserDiffUtilCallback) {
 
     inner class ViewHolder(
         private val binding: ItemHomeBinding

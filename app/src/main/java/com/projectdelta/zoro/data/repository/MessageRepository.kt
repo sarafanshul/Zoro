@@ -23,5 +23,10 @@ interface MessageRepository {
         seen: Boolean
     ): Flow<List<Message>>
 
+    suspend fun getAllMessagesFilteredBySeenAndSenderOffline(
+        senderId: String,
+        seen: Boolean
+    ) : List<Message>
+
     suspend fun deleteAllMessagesFilteredBySeen(isSeen: Boolean)
 }

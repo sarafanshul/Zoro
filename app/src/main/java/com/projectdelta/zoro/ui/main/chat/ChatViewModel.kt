@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import timber.log.Timber
 import javax.inject.Inject
 
 /*
@@ -40,6 +41,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+    // TODO move to activityViewModel
     fun sendMessage(message: Message) {
         launchIO {
             val newMessage = messageRepository.sendMessage(message)
@@ -53,5 +55,7 @@ class ChatViewModel @Inject constructor(
             _outgoingMessages.emit(messageList)
         }
     }
+
+
 
 }
