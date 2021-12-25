@@ -1,12 +1,12 @@
 package com.projectdelta.zoro.data.repository
 
 import com.projectdelta.zoro.data.model.Message
-import com.projectdelta.zoro.data.model.QueueInformation
+import com.projectdelta.zoro.data.model.MessageReturn
 import kotlinx.coroutines.flow.Flow
 
 interface MessageRepository {
 
-    suspend fun sendMessage(message: Message): QueueInformation?
+    suspend fun sendMessage(message: Message): MessageReturn?
 
     suspend fun getMessageCount(queueName: String): Int
 

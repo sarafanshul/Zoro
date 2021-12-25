@@ -3,7 +3,7 @@ package com.projectdelta.zoro.data.repository
 import android.os.Looper
 import com.projectdelta.zoro.data.local.MessageDao
 import com.projectdelta.zoro.data.model.Message
-import com.projectdelta.zoro.data.model.QueueInformation
+import com.projectdelta.zoro.data.model.MessageReturn
 import com.projectdelta.zoro.data.remote.MessageApi
 import com.projectdelta.zoro.util.Constants.WRONG_THREAD_EXCEPTION_IO
 import com.projectdelta.zoro.util.NotFound
@@ -16,11 +16,11 @@ class MessageRepositoryImpl(
 ) : MessageRepository {
 
     @Throws(NotFound.ItsYourFaultIdiotException::class)
-    override suspend fun sendMessage(message: Message): QueueInformation? {
+    override suspend fun sendMessage(message: Message): MessageReturn? {
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)
 
-        return when (val result: ApiResult<QueueInformation?> = api.sendMessage(message)) {
+        return when (val result: ApiResult<MessageReturn?> = api.sendMessage(message)) {
             is ApiResult.Success -> result.data
             else -> null
         }

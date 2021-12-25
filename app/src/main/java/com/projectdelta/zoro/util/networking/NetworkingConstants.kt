@@ -24,6 +24,7 @@ object NetworkingConstants {
     const val SUB_URL_SEND = "send"
     const val SUB_URL_COUNT = "count"
     const val SUB_URL_FRIENDS = "tomodachi"
+    const val SUB_URL_DISCONNECT = "nakama_bye"
 
     const val QUERY_QUEUE = "queue"
     const val QUERY_ID = "id"

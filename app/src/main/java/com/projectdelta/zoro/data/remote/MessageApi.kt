@@ -1,7 +1,7 @@
 package com.projectdelta.zoro.data.remote
 
 import com.projectdelta.zoro.data.model.Message
-import com.projectdelta.zoro.data.model.QueueInformation
+import com.projectdelta.zoro.data.model.MessageReturn
 import com.projectdelta.zoro.util.networking.NetworkingConstants.MESSAGE_URL
 import com.projectdelta.zoro.util.networking.NetworkingConstants.QUERY_QUEUE
 import com.projectdelta.zoro.util.networking.NetworkingConstants.SUB_URL_COUNT
@@ -17,7 +17,7 @@ interface MessageApi {
     @POST(MESSAGE_URL + SUB_URL_SEND)
     suspend fun sendMessage(
         @Body message: Message
-    ): ApiResult<QueueInformation?>
+    ): ApiResult<MessageReturn?>
 
     @GET(MESSAGE_URL + SUB_URL_COUNT)
     suspend fun getMessageCount(

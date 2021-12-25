@@ -1,9 +1,11 @@
 package com.projectdelta.zoro.ui.main.chat
 
 import androidx.lifecycle.ViewModel
+import com.projectdelta.zoro.data.model.ConnectionData
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.data.repository.MessageRepository
+import com.projectdelta.zoro.data.repository.UserRepository
 import com.projectdelta.zoro.util.system.lang.getValueOrNull
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +21,7 @@ Experimental state...
 class ChatViewModel @Inject constructor(
     private val messageRepository: MessageRepository,
     private val preferencesManager: PreferencesManager,
+    private val userRepository: UserRepository,
 ) : ViewModel() {
 
     private val _incomingMessages = MutableStateFlow<List<Message>>(listOf())
@@ -40,21 +43,33 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    // TODO move to activityViewModel
-    fun sendMessage(message: Message) {
+    fun sendMessage(text : String , receiver : String) {
         launchIO {
+            val message = Message(
+                receiverId = receiver,
+                senderId = "7",
+                data = text
+            )
             val newMessage = messageRepository.sendMessage(message)
-            // update backend to return new message with timestamp
-            /* if( newMessage != null )
-                message.time = new time*/
-            // here assuming message has timestamp.
-            val messageList: MutableList<Message> =
-                _outgoingMessages.getValueOrNull()?.toMutableList() ?: mutableListOf()
-            messageList.add(message)
-            _outgoingMessages.emit(messageList)
+            if( newMessage?.messageData != null ) {
+                newMessage.messageData.type = Message.Companion.MessageType.OUTGOING
+                val messageList: MutableList<Message> =
+                    _outgoingMessages.getValueOrNull()?.toMutableList() ?: mutableListOf()
+                messageList.add(newMessage.messageData)
+                _outgoingMessages.emit(messageList)
+            }
         }
     }
 
-
+    fun disconnectUser( otherUser : String ){
+        launchIO {
+            userRepository.disconnectUser(
+                ConnectionData(
+                    senderUser = "7" ,
+                    receiverUser = otherUser
+                )
+            )
+        }
+    }
 
 }

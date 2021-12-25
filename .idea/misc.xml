@@ -17,11 +17,12 @@
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_user.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_incoming.xml" value="0.33" />
-        <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_outgoing.xml" value="0.25" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_outgoing.xml" value="0.5" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_home.xml" value="0.22" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_message_incoming.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/menu/bottom_panel.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/menu/home.xml" value="0.1" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/menu/menu_chat.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/xml/network_security_config.xml" value="0.22447916666666667" />
       </map>
     </option>

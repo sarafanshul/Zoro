@@ -8,7 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.projectdelta.zoro.data.model.Message
+import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.FragmentChatBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
@@ -55,7 +55,21 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
         registerObservers()
 
+        setMenu()
+
         initUI()
+    }
+
+    private fun setMenu() {
+        binding.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.action_remove -> {
+                    viewModel.disconnectUser(receiver.id!!)
+                    requireActivity().onBackPressed() // FIXME UPDATE FRIENDS AFTER REMOVE
+                }
+            }
+            super.onOptionsItemSelected(it)
+        }
     }
 
     private fun initUI() {
@@ -84,14 +98,7 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
     private fun sendMessage( text : String? ){
         if( text.isOk() ) {
-            val message = Message(
-                receiverId = receiver.id,
-                senderId = "7",
-                data = text,
-                time = System.currentTimeMillis(),
-                type = Message.Companion.MessageType.OUTGOING
-            )
-            viewModel.sendMessage(message)
+            viewModel.sendMessage(text!! , receiver.id!!)
             binding.tvSend.text = "".toEditable()
         }
     }
