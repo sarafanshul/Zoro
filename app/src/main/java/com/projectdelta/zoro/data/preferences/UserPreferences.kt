@@ -7,8 +7,11 @@ import com.projectdelta.zoro.data.model.BaseDataModel
  */
 data class UserPreferences(
     val userId: String,
-    val firstLogin: Boolean
+    val firstLogin: Boolean,
+    val userName : String,
+    val firstLoginTime : Long,
+
 ) : BaseDataModel() {
     override fun copy() =
-        UserPreferences(userId, firstLogin)
+        UserPreferences(userId, firstLogin ,userName, firstLoginTime)
 }

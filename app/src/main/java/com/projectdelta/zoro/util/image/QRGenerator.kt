@@ -5,6 +5,7 @@ import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.github.sumimakito.awesomeqr.option.background.BlendBackground
 import com.github.sumimakito.awesomeqr.option.color.Color
 import com.github.sumimakito.awesomeqr.option.logo.Logo
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 object QRGenerator {
 
@@ -28,13 +29,13 @@ object QRGenerator {
 
         val background = BlendBackground()
         background.bitmap = backgroundImage
-        background.alpha = 0.8f
+        background.alpha = 0.65f
         background.borderRadius = 10 // radius for blending corners
 
         val renderOption = RenderOption()
         renderOption.content = content
         renderOption.size = IMAGE_SIZE
-//        renderOption.ecl =
+        renderOption.ecl = ErrorCorrectionLevel.H
         renderOption.borderWidth = BORDER_WIDTH
         renderOption.roundedPatterns = true
         renderOption.clearBorder = true

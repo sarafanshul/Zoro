@@ -17,6 +17,8 @@ import com.projectdelta.zoro.ui.main.chat.adapter.ChatRecyclerAdapter
 import com.projectdelta.zoro.util.system.lang.*
 import com.projectdelta.zoro.util.widget.SpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -64,8 +66,15 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
         binding.toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.action_remove -> {
-                    viewModel.disconnectUser(receiver.id!!)
-                    requireActivity().onBackPressed() // FIXME UPDATE FRIENDS AFTER REMOVE
+                    viewModel.disconnectUser(receiver.id!!){
+                        activityViewModel.refreshConnectionList
+                            .emit(MainViewModel.Companion.RefreshType.CONNECTION_LIST)
+                        // emits but at that time homeView is not observing hence no List update , FIXIT later
+
+                        withContext(Dispatchers.Main) {
+                            requireActivity().onBackPressed()
+                        }
+                    }
                 }
             }
             super.onOptionsItemSelected(it)

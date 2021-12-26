@@ -21,6 +21,12 @@ class MainViewModel @Inject constructor(
     private val messageRepository: MessageRepository
 ) : ViewModel() {
 
+    companion object{
+        enum class RefreshType{
+            CONNECTION_LIST ,
+        }
+    }
+
     @Volatile
     var currentChatReceiver = ""
 
@@ -30,6 +36,8 @@ class MainViewModel @Inject constructor(
     private val _bottomNavVisibility = MutableSharedFlow<Int>()
 
     val bottomNavVisibility = _bottomNavVisibility.asSharedFlow()
+
+    val refreshConnectionList = MutableSharedFlow<RefreshType>()
 
     fun showBottomNav() {
         launchIO {

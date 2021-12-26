@@ -61,14 +61,15 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun disconnectUser( otherUser : String ){
+    fun disconnectUser( otherUser : String ,doAfter : suspend () -> Unit ){
         launchIO {
-            userRepository.disconnectUser(
+            val success = userRepository.disconnectUser(
                 ConnectionData(
                     senderUser = "7" ,
                     receiverUser = otherUser
                 )
             )
+            if( success ){ doAfter() }
         }
     }
 

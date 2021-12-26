@@ -121,6 +121,10 @@ dependencies {
 
     implementation 'com.rabbitmq:amqp-client:5.14.0'
 
+    // QR libs
     implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
+    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.google.zxing:android-core:3.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
 }

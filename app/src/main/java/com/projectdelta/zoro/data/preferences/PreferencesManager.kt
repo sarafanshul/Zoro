@@ -33,7 +33,9 @@ class PreferencesManager(
             .map { preferences ->
                 val userId: String = preferences[PreferenceKeys.USER_ID] ?: ""
                 val firstLogin: Boolean = preferences[PreferenceKeys.FIRST_LOGIN] ?: true
-                UserPreferences(userId, firstLogin)
+                val userName : String = preferences[PreferenceKeys.USER_NAME] ?: ""
+                val firstLoginTime : Long = preferences[PreferenceKeys.FIRST_LOGIN_TIME] ?: 0L
+                UserPreferences(userId, firstLogin, userName, firstLoginTime)
             }
 
     suspend fun updateUserId(id: String) {
@@ -45,6 +47,18 @@ class PreferencesManager(
     suspend fun updateFirstLogin(status: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.FIRST_LOGIN] = status
+        }
+    }
+
+    suspend fun updateUserName(userName: String){
+        context.dataStore.edit { preferences ->
+            preferences[PreferenceKeys.USER_NAME] = userName
+        }
+    }
+
+    suspend fun updateFirstLoginDate(loginTime: Long){
+        context.dataStore.edit { preferences ->
+            preferences[PreferenceKeys.FIRST_LOGIN_TIME] = loginTime
         }
     }
 

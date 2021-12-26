@@ -66,13 +66,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getPreferences() {
-        launchIO {
-            preferencesManager.preferenceFlow.collectLatest { pref ->
-//                getFriends(pref.userId)
-                getFriends("7")
-            }
-        }
+    fun getPreferences() {
+        getFriends("7")
+//        val id = preferencesManager.preferenceFlow.getValueBlockedOrNull()?.userId
+//        if( id != null )
+//            getFriends(id)
     }
 
     fun updateQuery(query: String) {

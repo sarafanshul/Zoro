@@ -440,6 +440,14 @@ fun <T> Fragment.collectLifecycleFlow(
     }
 }
 
+fun Fragment.launchIO(
+    collect: suspend CoroutineScope.() -> Unit
+) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { collect() }
+    }
+}
+
 fun ViewModel.launchIO(
     collect: suspend CoroutineScope.() -> Unit
 ) {

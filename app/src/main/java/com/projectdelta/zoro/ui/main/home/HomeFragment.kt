@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +14,10 @@ import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.FragmentHomeBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
+import com.projectdelta.zoro.ui.main.MainViewModel
 import com.projectdelta.zoro.ui.main.home.adapter.HomeRecyclerViewAdapter
 import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
+import com.projectdelta.zoro.util.system.lang.launchIO
 import com.projectdelta.zoro.util.system.lang.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,6 +29,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
     private var adapter: HomeRecyclerViewAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
+    private val activityViewModel : MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +95,21 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
     }
 
     private fun registerObservers() {
+
+        binding.swipeLayout.setOnRefreshListener {
+            launchIO {
+                activityViewModel.refreshConnectionList.emit(MainViewModel.Companion.RefreshType.CONNECTION_LIST)
+            }
+        }
+
         collectLatestLifecycleFlow(viewModel.userData) {
             adapter?.submitList(it)
+        }
+
+        collectLatestLifecycleFlow(activityViewModel.refreshConnectionList){
+            if( it == MainViewModel.Companion.RefreshType.CONNECTION_LIST )
+                viewModel.getPreferences()
+            binding.swipeLayout.isRefreshing = false
         }
     }
 
