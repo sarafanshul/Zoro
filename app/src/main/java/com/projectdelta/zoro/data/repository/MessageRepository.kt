@@ -14,6 +14,8 @@ interface MessageRepository {
 
     suspend fun updateMessageToDatabase(message: Message)
 
+    suspend fun updateMessageByUserIdSeen(userId : String ,seen: Boolean)
+
     suspend fun deleteMessageFromDatabase(message: Message)
 
     suspend fun getAllMessagesFilteredBySeen(isSeen: Boolean): Flow<List<Message>>

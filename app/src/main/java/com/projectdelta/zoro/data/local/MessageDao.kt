@@ -16,6 +16,9 @@ abstract class MessageDao {
     @Update
     abstract fun updateMessage(message: Message)
 
+    @Query("UPDATE MESSAGE_TABLE SET seen =:seen WHERE senderId =:senderId AND seen !=:seen")
+    abstract fun updateMessageByUserIdSeen(senderId: String ,seen: Boolean)
+
     @Delete
     abstract fun deleteMessage(message: Message)
 
@@ -47,7 +50,6 @@ abstract class MessageDao {
         senderId: String,
         seen: Boolean
     ) : List<Message>
-
 
     @Query("DELETE FROM MESSAGE_TABLE WHERE seen =:seen")
     abstract fun deleteAllMessagesFilteredBySeen(seen: Boolean)

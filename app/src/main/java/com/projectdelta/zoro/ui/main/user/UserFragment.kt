@@ -1,23 +1,22 @@
+@file:Suppress("DEPRECATION") // FIXME - IntentIntegrator/onActivityResult
 package com.projectdelta.zoro.ui.main.user
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.integration.android.IntentIntegrator
 import com.projectdelta.zoro.R
-import com.projectdelta.zoro.data.preferences.UserPreferences
 import com.projectdelta.zoro.databinding.FragmentUserBinding
-import com.projectdelta.zoro.ui.base.BaseActivity
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
-import com.projectdelta.zoro.util.image.QRGenerator.generateRenderOptions
-import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
+import com.projectdelta.zoro.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -29,16 +28,23 @@ import java.util.*
 class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
 
     private val viewModel: UserViewModel by viewModels()
+    private val activityViewModel: MainViewModel by activityViewModels()
 
-    private var userPreferences : UserPreferences? = null
+    private var displayBitmap : Bitmap? = null
 
     @SuppressLint("SimpleDateFormat")
     private val formatter = SimpleDateFormat("dd MMMM yy")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userPreferences = (requireActivity() as BaseActivity)
-                .preferenceManager.preferenceFlow.getValueBlockedOrNull()
+
+        val opt = BitmapFactory.Options()
+        opt.inMutable = true
+
+        displayBitmap = BitmapFactory
+            .decodeResource(resources, R.drawable.png_onepiece_background, opt)
+
     }
 
     override fun onCreateView(
@@ -60,28 +66,22 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
     }
 
     @SuppressLint("SetTextI18n")
-    @Suppress("DEPRECATION") // FIXME
     private fun initUI() {
 
-        binding.userName.text = userPreferences?.userName
-        binding.userDate.text = "Since ${formatter.format(Date(userPreferences?.firstLoginTime ?: 0L))}"
+        binding.userName.text = viewModel.userPreferences?.userName
+        binding.userDate.text =
+            "Since ${formatter.format(Date(viewModel.userPreferences?.firstLoginTime ?: 0L))}"
 
         val opt = BitmapFactory.Options()
         opt.inMutable = true
-        val renderOption = generateRenderOptions(
-            content = userPreferences?.userId!!,
-            backgroundImage = BitmapFactory
-                .decodeResource(resources ,R.drawable.png_onepiece_background ,opt)
-        )
 
-        AwesomeQrRenderer.renderAsync(renderOption,
+        AwesomeQrRenderer.renderAsync(viewModel.getRenderOption(displayBitmap!!),
             resultCallback@{ result ->
                 if (result.bitmap != null) {
                     runBlocking(Dispatchers.Main) {
                         binding.ivQr.setImageBitmap(result.bitmap)
                     }
-                }
-                else {
+                } else {
                     Timber.e("Opps! Something gone wrong.. :((")
                 }
             },
@@ -101,13 +101,14 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
         }
     }
 
-    @Suppress("DEPRECATION") // FIXME
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode ,resultCode ,data)
-        if( result?.contents != null ){
-            Snackbar.make(binding.root ,result.contents ,Snackbar.LENGTH_LONG).show()
-        }else {
-            Snackbar.make(binding.root ,"Scan error!" ,Snackbar.LENGTH_LONG).show()
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result?.contents != null) {
+            viewModel.connectUser(result.contents) {
+                activityViewModel.refreshConnectionList
+                    .emit(MainViewModel.Companion.RefreshType.CONNECTION_LIST)
+            }
+        } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -119,7 +120,7 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
     }
 
     override fun onDestroy() {
-        userPreferences = null
+        displayBitmap = null
         super.onDestroy()
     }
 

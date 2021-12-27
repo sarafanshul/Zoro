@@ -10,7 +10,7 @@
         android:id="@+id/scan"
         android:layout_width="@dimen/item_img_max_height"
         android:layout_height="@dimen/item_img_max_height"
-        android:src="@drawable/ic_round_flip_24"
+        android:src="@drawable/ic_round_qr_code_scanner_24"
         app:layout_constraintBottom_toTopOf="@+id/iv_qr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -50,6 +50,7 @@
         android:text="@string/action_search"
         android:textSize="@dimen/text_medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        android:layout_marginBottom="@dimen/bottom_nav_height" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

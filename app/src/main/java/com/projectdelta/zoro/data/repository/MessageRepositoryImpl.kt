@@ -54,6 +54,14 @@ class MessageRepositoryImpl(
     }
 
     @Throws(NotFound.ItsYourFaultIdiotException::class)
+    override suspend fun updateMessageByUserIdSeen(userId: String, seen: Boolean) {
+        if (Thread.currentThread().equals(Looper.getMainLooper().thread))
+            throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)
+
+        dao.updateMessageByUserIdSeen(userId, seen)
+    }
+
+    @Throws(NotFound.ItsYourFaultIdiotException::class)
     override suspend fun deleteMessageFromDatabase(message: Message) {
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)

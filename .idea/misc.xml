@@ -13,8 +13,8 @@
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/item_rv_divider.xml" value="0.2361111111111111" />
         <entry key="..\:/Android/Zoro/app/src/main/res/font/product_sans_font_family.xml" value="0.225" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
-        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_user.xml" value="0.2" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_incoming.xml" value="0.33" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_outgoing.xml" value="0.5" />

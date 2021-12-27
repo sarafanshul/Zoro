@@ -33,7 +33,7 @@ class ChatViewModel @Inject constructor(
         newList.addAll(m2)
         newList.sortBy { it.time }
         newList
-    }
+    } // very slow
 
     fun getReceiverUserData(userId: String) {
         launchIO {

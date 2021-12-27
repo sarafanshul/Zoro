@@ -18,6 +18,7 @@ import com.projectdelta.zoro.util.system.lang.*
 import com.projectdelta.zoro.util.widget.SpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
@@ -115,6 +116,12 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
     private fun registerObservers(){
         collectLatestLifecycleFlow(viewModel.messages){
             adapter?.submitList(it)
+            launchIO {
+                if( it.isNotEmpty() && it.last().senderId != receiver.id ) { // scroll to last message after any UI (sender) update.
+                    delay(100)
+                    binding.rvChat.scrollToPosition(it.size - 1)
+                }
+            }
         }
     }
 

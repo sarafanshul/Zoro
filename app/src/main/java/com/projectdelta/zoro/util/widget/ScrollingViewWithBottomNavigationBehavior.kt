@@ -21,6 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * app:layout_behavior=".ScrollingViewWithBottomNavigationBehavior"
  * ```
  */
+@Suppress("unused")
 class ScrollingViewWithBottomNavigationBehavior(context: Context, attrs: AttributeSet) : AppBarLayout.ScrollingViewBehavior(context, attrs) {
     // We add a bottom margin to avoid the bottom navigation bar
     private var bottomMargin = 0

@@ -11,14 +11,17 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar">
+        android:id="@+id/app_bar"
+        android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/home"
-            app:menu="@menu/home"/>
+            app:menu="@menu/home"
+            android:backgroundTint="?colorPrimary"
+            android:background="@drawable/curved_toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

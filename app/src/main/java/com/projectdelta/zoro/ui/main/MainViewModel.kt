@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,7 +36,7 @@ class MainViewModel @Inject constructor(
 
     val bottomNavVisibility = _bottomNavVisibility.asSharedFlow()
 
-    val refreshConnectionList = MutableSharedFlow<RefreshType>()
+    val refreshConnectionList = MutableSharedFlow<RefreshType>() // setting replay = 1 , solves the
 
     fun showBottomNav() {
         launchIO {
@@ -73,13 +72,7 @@ class MainViewModel @Inject constructor(
 
     fun setMessagesSeen( userId : String ){
         launchIO {
-            messageRepository.getAllMessagesFilteredBySeenAndSenderOffline(userId ,false).forEach {
-                it.seen = true
-                launchIO {
-                    Timber.d("updated!")
-                    messageRepository.updateMessageToDatabase(it)
-                }
-            }
+            messageRepository.updateMessageByUserIdSeen(userId ,true)
         }
     }
 
