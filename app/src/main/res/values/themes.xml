@@ -15,4 +15,10 @@
         <item name="android:navigationBarColor">?attr/colorPrimary</item>
         <item name="fontFamily">@font/product_sans_font_family</item>
     </style>
+    <style name="Theme.Zoro.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Zoro.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Zoro.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

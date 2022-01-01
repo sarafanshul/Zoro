@@ -30,6 +30,8 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.NotificationCompat
@@ -47,12 +49,15 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
 import com.projectdelta.zoro.R
+import com.projectdelta.zoro.util.Constants
+import com.projectdelta.zoro.util.Constants.DEFAULT_BIOMETRIC_LEVEL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 /**
@@ -448,8 +453,47 @@ fun Fragment.launchIO(
     }
 }
 
-fun ViewModel.launchIO(
-    collect: suspend CoroutineScope.() -> Unit
-) {
+fun ViewModel.launchIO(collect: suspend CoroutineScope.() -> Unit) =
     viewModelScope.launch(Dispatchers.IO, block = collect)
+
+/**
+ * Checks if Biometrics are available in the device
+ * @return [Constants.BiometricStatus] as per status
+ */
+val Context.biometricStatus : Constants.BiometricStatus
+    get() = when(BiometricManager.from(this).canAuthenticate(DEFAULT_BIOMETRIC_LEVEL)){
+        BiometricManager.BIOMETRIC_SUCCESS ->
+            Constants.BiometricStatus.STATUS_SUCCESS
+        BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
+            Constants.BiometricStatus.STATUS_NONE_ENROLLED
+        else ->
+            Constants.BiometricStatus.STATUS_UNAVAILABLE
+    }
+
+/**
+ * [BiometricPrompt] builder for ease
+ */
+inline fun AppCompatActivity.getBiometricPrompt(
+    crossinline onSuccess : () -> Unit,
+    crossinline onError : () -> Unit,
+): BiometricPrompt {
+    val biometricPrompt = BiometricPrompt(this, mainExecutor,
+        object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                Timber.e("${this::class.simpleName}, Biometric Auth ErrorCode : $errorCode\n" , errString )
+                onError()
+            }
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                onSuccess()
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                Timber.e("${this::class.simpleName}, Biometric Auth failed")
+                onError()
+            }
+        })
+    return biometricPrompt
 }

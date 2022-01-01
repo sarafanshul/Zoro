@@ -12,4 +12,5 @@
     <dimen name="text_large">26sp</dimen>
     <dimen name="text_medium">20sp</dimen>
     <dimen name="bottom_nav_height">57dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

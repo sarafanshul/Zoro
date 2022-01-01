@@ -1,5 +1,7 @@
 package com.projectdelta.zoro.util
 
+import androidx.biometric.BiometricFragment
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import java.util.*
 
 @Suppress("unused")
@@ -32,4 +34,11 @@ object Constants {
     const val MESSAGE_TABLE = "message_table"
 
     const val WRONG_THREAD_EXCEPTION_IO = "Wrong Method Exception, (Required IO thread)"
+
+    // Biometrics
+    const val DEFAULT_BIOMETRIC_LEVEL = BIOMETRIC_STRONG
+
+    enum class BiometricStatus{
+        STATUS_SUCCESS ,STATUS_UNAVAILABLE ,STATUS_NONE_ENROLLED
+    }
 }

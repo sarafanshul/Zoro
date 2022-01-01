@@ -7,6 +7,7 @@ import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.data.repository.UserRepository
 import com.projectdelta.zoro.util.system.lang.copy
+import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
 import com.projectdelta.zoro.util.system.lang.getValueOrNull
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,13 +19,15 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val messageRepository: MessageRepository,
-    private val preferencesManager: PreferencesManager
+    preferencesManager: PreferencesManager
 ) : ViewModel() {
 
+    val userId = preferencesManager.preferenceFlow.getValueBlockedOrNull()?.userId
     init {
         getPreferences()
         getUnreadMessages()
     }
+
 
     private val _friends = MutableStateFlow<List<User>>(listOf())
     private val _apiResponse = MutableStateFlow<List<User>>(listOf())
@@ -67,10 +70,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getPreferences() {
-        getFriends("7")
-//        val id = preferencesManager.preferenceFlow.getValueBlockedOrNull()?.userId
-//        if( id != null )
-//            getFriends(id)
+        getFriends(userId!!)
     }
 
     fun updateQuery(query: String) {

@@ -12,4 +12,5 @@ object PreferenceKeys {
     val FIRST_LOGIN = booleanPreferencesKey("first_login")
     val USER_NAME = stringPreferencesKey("user_name")
     val FIRST_LOGIN_TIME = longPreferencesKey("first_login_time")
+    val BIOMETRIC_ENABLED = booleanPreferencesKey("biometric_enabled")
 }

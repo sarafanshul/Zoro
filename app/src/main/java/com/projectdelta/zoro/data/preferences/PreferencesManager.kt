@@ -35,7 +35,9 @@ class PreferencesManager(
                 val firstLogin: Boolean = preferences[PreferenceKeys.FIRST_LOGIN] ?: true
                 val userName : String = preferences[PreferenceKeys.USER_NAME] ?: ""
                 val firstLoginTime : Long = preferences[PreferenceKeys.FIRST_LOGIN_TIME] ?: 0L
-                UserPreferences(userId, firstLogin, userName, firstLoginTime)
+                val biometricEnabled : Boolean = preferences[PreferenceKeys.BIOMETRIC_ENABLED] ?: false
+
+                UserPreferences(userId, firstLogin, userName, firstLoginTime, biometricEnabled)
             }
 
     suspend fun updateUserId(id: String) {
@@ -59,6 +61,12 @@ class PreferencesManager(
     suspend fun updateFirstLoginDate(loginTime: Long){
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.FIRST_LOGIN_TIME] = loginTime
+        }
+    }
+
+    suspend fun updateBiometricStatus(status: Boolean){
+        context.dataStore.edit{ preferences ->
+            preferences[PreferenceKeys.BIOMETRIC_ENABLED] = status
         }
     }
 

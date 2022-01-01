@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.login.LoginActivity">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:id="@+id/user_name"
+        android:imeOptions="actionDone"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_medium"
+        android:maxLength="@integer/max_user_name_length"
+        android:layout_marginHorizontal="@dimen/base_padding"
+        android:hint="@string/hint_user_name"
+        android:gravity="center"/>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/user_name"
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        app:indicatorColor="@array/default_progress_bar_colors"
+        android:indeterminate="true"
+        app:indeterminateAnimationType="contiguous"
+        app:layout_anchorGravity="bottom"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

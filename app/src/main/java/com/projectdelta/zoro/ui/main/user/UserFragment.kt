@@ -113,11 +113,7 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
         }
     }
 
-    private fun registerObservers() {
-//        collectLatestLifecycleFlow(viewModel.userPreferences) {
-//            loadUserProfileImage(binding.ivUser ,it.userId)
-//        }
-    }
+    private fun registerObservers() {}
 
     override fun onDestroy() {
         displayBitmap = null

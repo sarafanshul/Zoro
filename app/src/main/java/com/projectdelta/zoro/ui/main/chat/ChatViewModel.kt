@@ -6,6 +6,7 @@ import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.data.repository.UserRepository
+import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
 import com.projectdelta.zoro.util.system.lang.getValueOrNull
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,12 +21,14 @@ Experimental state...
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val messageRepository: MessageRepository,
-    private val preferencesManager: PreferencesManager,
+    preferencesManager: PreferencesManager,
     private val userRepository: UserRepository,
 ) : ViewModel() {
 
     private val _incomingMessages = MutableStateFlow<List<Message>>(listOf())
     private val _outgoingMessages = MutableStateFlow<List<Message>>(listOf())
+
+    val userId = preferencesManager.preferenceFlow.getValueBlockedOrNull()?.userId
 
     val messages = _incomingMessages.combine(_outgoingMessages) { m1, m2 ->
         val newList = mutableListOf<Message>()
@@ -47,7 +50,7 @@ class ChatViewModel @Inject constructor(
         launchIO {
             val message = Message(
                 receiverId = receiver,
-                senderId = "7",
+                senderId = userId!!,
                 data = text
             )
             val newMessage = messageRepository.sendMessage(message)
@@ -65,7 +68,7 @@ class ChatViewModel @Inject constructor(
         launchIO {
             val success = userRepository.disconnectUser(
                 ConnectionData(
-                    senderUser = "7" ,
+                    senderUser = userId!! ,
                     receiverUser = otherUser
                 )
             )

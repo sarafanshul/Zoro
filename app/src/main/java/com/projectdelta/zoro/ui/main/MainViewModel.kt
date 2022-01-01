@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.projectdelta.zoro.data.model.Message
+import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.util.networking.amqp.AMQPClient
 import com.projectdelta.zoro.util.system.lang.launchIO
@@ -50,11 +51,13 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun registerClient() {
+    /**
+     * @param queueId [User.id]
+     */
+    fun registerClient(queueId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             amqpClient.registerChannel()
-
-            amqpClient.consumeMessage("7") { m ->
+            amqpClient.consumeMessage(queueId) { m ->
                 viewModelScope.launch(Dispatchers.IO) {
                     messageRepository.insertMessageToDatabase(m!!)
                     if( m.senderId != currentChatReceiver ) // don't fire while in room with same user

@@ -36,8 +36,8 @@ class UserViewModel @Inject constructor(
     fun connectUser( userId : String ,doAfter : suspend () -> Unit){
         launchIO {
             val x = userRepository.connectUser(ConnectionData(
-                senderUser = "7",//userPreferences?.userId,
-                receiverUser = "1" //userId
+                senderUser = userPreferences?.userId,
+                receiverUser = userId
             ))
             if( x )
                 doAfter()

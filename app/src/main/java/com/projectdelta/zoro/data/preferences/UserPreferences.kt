@@ -10,8 +10,9 @@ data class UserPreferences(
     val firstLogin: Boolean,
     val userName : String,
     val firstLoginTime : Long,
+    val biometricEnabled : Boolean
 
 ) : BaseDataModel() {
     override fun copy() =
-        UserPreferences(userId, firstLogin ,userName, firstLoginTime)
+        UserPreferences(userId, firstLogin ,userName, firstLoginTime, biometricEnabled)
 }

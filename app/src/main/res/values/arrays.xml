@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="default_progress_bar_colors">
+        <item>@color/dark_blue_green</item>
+        <item>@color/lighter_green</item>
+        <item>@color/light_green</item>
+        <item>@color/lighter_green</item>
+    </integer-array>
+
+</resources>

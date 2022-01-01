@@ -15,7 +15,6 @@ import com.projectdelta.zoro.util.system.lang.*
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
@@ -37,10 +36,13 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
     }
 
     private fun registerObservers() {
+
+        val userPreferences = preferenceManager.preferenceFlow.getValueBlockedOrNull()
+
         connectivityManager.isNetworkAvailable.observe(this) { isOnline ->
             when (isOnline) {
                 true -> {
-                    viewModel.registerClient()
+                    viewModel.registerClient(userPreferences?.userId!!)
                 }
                 false -> {
                     viewModel.unregisterClient()
