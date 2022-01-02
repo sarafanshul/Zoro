@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/base_padding_large"
+    tools:context=".ui.main.setting.SettingFragment">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/biometrics"
+        android:textSize="@dimen/text_medium"
+        android:text="@string/biometrics" />
+
+    <View
+        style="@style/Divider"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_dev"
+        android:textColor="?colorOnSecondary"
+        android:textSize="@dimen/text_medium"
+        android:paddingVertical="@dimen/base_padding"/>
+
+</LinearLayout>

@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
 
-    private var biometricPrompt : BiometricPrompt? = null
+    private lateinit var biometricPrompt : BiometricPrompt
 
     private val viewModel : LoginViewModel by viewModels()
 
@@ -77,23 +77,22 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
     }
 
     private fun launchBiometricPrompt() {
-        if( biometricPrompt != null )
-            biometricPrompt = getBiometricPrompt(
-                onSuccess@{
-                    launchMainActivity()
-                } ,
-                onError@{
-                    Snackbar.make(binding.root ,"Some error occurred , try again!" ,Snackbar.LENGTH_SHORT)
-                        .show()
-                }
-            )
+        biometricPrompt = getBiometricPrompt(
+            onSuccess@{
+                launchMainActivity()
+            } ,
+            onError@{
+                Snackbar.make(binding.root ,"Some error occurred , try again!" ,Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        )
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for my app")
+            .setTitle("Secure Login")
             .setSubtitle("Log in using your biometric credential")
             .setNegativeButtonText("Use account password")
             .build()
 
-        biometricPrompt?.authenticate(promptInfo)
+        biometricPrompt.authenticate(promptInfo)
 
     }
 
@@ -104,7 +103,6 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
         }
 
     override fun onDestroy() {
-        biometricPrompt = null
         super.onDestroy()
     }
 

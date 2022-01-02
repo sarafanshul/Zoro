@@ -22,7 +22,11 @@
         android:id="@+id/userFragment"
         android:name="com.projectdelta.zoro.ui.main.user.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.projectdelta.zoro.ui.main.chat.ChatFragment"
@@ -32,4 +36,9 @@
             android:name="Receiver"
             app:argType="com.projectdelta.zoro.data.model.User" />
     </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.projectdelta.zoro.ui.main.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

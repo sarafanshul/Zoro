@@ -488,7 +488,6 @@ inline fun AppCompatActivity.getBiometricPrompt(
                 super.onAuthenticationSucceeded(result)
                 onSuccess()
             }
-
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
                 Timber.e("${this::class.simpleName}, Biometric Auth failed")

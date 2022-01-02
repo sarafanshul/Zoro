@@ -78,7 +78,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         binding.bottomPanel.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-            if (destination.id in listOf(R.id.chatFragment)) {
+            if (destination.id in listOf(R.id.chatFragment ,R.id.settingFragment)) {
                 viewModel.hideBottomNav()
             } else {
                 viewModel.showBottomNav()
