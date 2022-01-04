@@ -1,4 +1,4 @@
-name: Android CD
+name: Android release signed artifact
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 jobs:
 
   build:
-    needs: [ unit_tests, android_tests ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
