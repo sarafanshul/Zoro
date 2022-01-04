@@ -8,15 +8,18 @@
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/circle_bg.xml" value="0.20462962962962963" />
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/circle_iv.xml" value="0.2" />
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/curved_toolbar.xml" value="0.2222222222222222" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/drawable/ic_arrow_back_ios_black_24dp.xml" value="0.225" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/drawable/ic_arrow_forward_ios_black_24dp.xml" value="0.225" />
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/ic_onepiece.xml" value="0.2222222222222222" />
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/ic_round_person_24.xml" value="0.240625" />
         <entry key="..\:/Android/Zoro/app/src/main/res/drawable/item_rv_divider.xml" value="0.2361111111111111" />
         <entry key="..\:/Android/Zoro/app/src/main/res/font/product_sans_font_family.xml" value="0.225" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/layout/activity_web_view.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/content_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
-        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_setting.xml" value="0.22" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/fragment_user.xml" value="0.2" />
         <entry key="..\:/Android/Zoro/app/src/main/res/layout/item_chat_incoming.xml" value="0.33" />
@@ -26,6 +29,7 @@
         <entry key="..\:/Android/Zoro/app/src/main/res/menu/bottom_panel.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/menu/home.xml" value="0.1" />
         <entry key="..\:/Android/Zoro/app/src/main/res/menu/menu_chat.xml" value="0.22447916666666667" />
+        <entry key="..\:/Android/Zoro/app/src/main/res/menu/webview.xml" value="0.22447916666666667" />
         <entry key="..\:/Android/Zoro/app/src/main/res/xml/network_security_config.xml" value="0.22447916666666667" />
       </map>
     </option>

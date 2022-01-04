@@ -25,7 +25,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.projectdelta.zoro.util.widget.ThemedSwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/swipe_layout"
@@ -40,6 +40,6 @@
             tools:itemCount="7"
             android:overScrollMode="ifContentScrolls"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.projectdelta.zoro.util.widget.ThemedSwipeRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

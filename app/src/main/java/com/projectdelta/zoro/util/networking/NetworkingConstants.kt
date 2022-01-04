@@ -7,6 +7,9 @@ object NetworkingConstants {
     fun getAvatarURIByUserId(userId: String): String =
         "$AVATAR_API$userId.png"
 
+    // DEV PROFILE
+    const val DEV_PROFILE = "https://github.com/sarafanshul"
+
     // RabbitMQ API
     const val RABBIT_API = "10.0.2.2"
     const val RABBIT_PORT = 5672

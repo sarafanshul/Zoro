@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.databinding.ActivityMainBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
+import com.projectdelta.zoro.ui.web.WebViewActivity
 import com.projectdelta.zoro.util.Constants.ALERT_NOTIFICATION_DURATION
 import com.projectdelta.zoro.util.NotFound
 import com.projectdelta.zoro.util.system.lang.*
@@ -88,6 +89,12 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     private fun initUI() {
 
+    }
+
+    fun launchWebView(url : String ,title : String?){
+        WebViewActivity.newIntent(this ,url ,null ,title).also {
+            startActivity(it)
+        }
     }
 
     override fun onDestroy() {

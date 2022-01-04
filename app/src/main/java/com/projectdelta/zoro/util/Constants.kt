@@ -1,6 +1,5 @@
 package com.projectdelta.zoro.util
 
-import androidx.biometric.BiometricFragment
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import java.util.*
 

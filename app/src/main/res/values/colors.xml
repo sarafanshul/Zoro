@@ -30,4 +30,6 @@
     <color name="dark_grey">#787a7d</color>
     <color name="dateTimeHeader">#4a4a4a</color>
     <color name="lightTeal">#d2ffff</color>
+
+    <color name="something_yellow">#F17A0A</color>
 </resources>

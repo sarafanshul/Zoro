@@ -1,0 +1,42 @@
+name: Android CD
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+
+  build:
+    needs: [ unit_tests, android_tests ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Decode BASEURL
+        run: echo API_BASE_URL=TEST > ./local.properties
+#        env:
+#          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+#        run: echo API_BASE_URL=$API_BASE_URL > ./local.properties
+      - name: Build Release Artifact
+        run: ./gradlew app:assembleRelease --stacktrace
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Release Artifacts
+          path: app/build/outputs/apk/release/*.apk
+      - name: Release Artifacts
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "app/build/outputs/apk/release/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}

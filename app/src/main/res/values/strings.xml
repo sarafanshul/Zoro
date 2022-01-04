@@ -21,4 +21,13 @@
     <string name="hint_user_name">Your user name</string>
     <string name="biometrics">Biometrics</string>
     <string name="about_dev">About Developers</string>
+
+    <string name="action_webview_back">Back</string>
+    <string name="action_webview_forward">Forward</string>
+    <string name="action_webview_refresh">Refresh</string>
+    <string name="action_share">Share</string>
+    <string name="action_open_in_browser">Open in browser</string>
+    <string name="set_theme">Set theme</string>
+    <string name="settings">Settings</string>
+
 </resources>
