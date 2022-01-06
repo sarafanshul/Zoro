@@ -32,7 +32,11 @@ class ChatRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
-        holder.bind(getItem(position) , onClickCallback)
+        val nextIsSame : Boolean =
+            if( position + 1 < itemCount )
+                getItem(position + 1).type == getItem(position).type
+            else false
+        holder.bind(getItem(position) ,nextIsSame , onClickCallback)
     }
 
     override fun getItemViewType(position: Int): Int {

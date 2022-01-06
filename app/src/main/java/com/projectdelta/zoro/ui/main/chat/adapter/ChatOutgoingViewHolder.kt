@@ -1,5 +1,6 @@
 package com.projectdelta.zoro.ui.main.chat.adapter
 
+import android.view.View
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.databinding.ItemChatOutgoingBinding
 import com.projectdelta.zoro.util.system.lang.chop
@@ -10,11 +11,12 @@ class ChatOutgoingViewHolder(
 ) : ChatViewHolder<ItemChatOutgoingBinding>(binding) {
 
     override fun bind(
-        message: Message,
-        onClickCallback: (m: Message, c: Companion.ClickType) -> Unit
+        message: Message ,
+        nextIsSame : Boolean ,
+        onClickCallback: (m : Message ,c : Companion.ClickType) -> Unit
     ) {
         with(binding){
-            tvChat.text = (message.data + "\t").chop(30)
+            tvChat.text = (" ".repeat(4) + message.data + " ".repeat(8)).chop(30)
             tvTime.text = formatter.format(Date( message.time ?: 0 ))
 
             root.setOnLongClickListener {
@@ -24,6 +26,11 @@ class ChatOutgoingViewHolder(
 
             root.setOnClickListener {
                 onClickCallback(message ,Companion.ClickType.SHORT)
+
+                if( binding.tvTime.visibility == View.VISIBLE )
+                    binding.tvTime.visibility = View.GONE
+                else
+                    binding.tvTime.visibility = View.VISIBLE
             }
         }
     }

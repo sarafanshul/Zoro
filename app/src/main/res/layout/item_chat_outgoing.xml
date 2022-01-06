@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:layout_gravity="end|center_vertical">
 
     <TextView
@@ -34,6 +35,7 @@
         tools:maxLines="1"
         android:textColor="@color/black"
         android:textSize="@dimen/text_small"
+        android:visibility="gone"
         android:paddingStart="16dp"
         android:paddingBottom="4dp"
         tools:text = "@tools:sample/lorem"

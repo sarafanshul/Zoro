@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:layout_gravity="start|center_vertical"
     tools:layout_marginTop="12dp">
 
@@ -34,6 +35,7 @@
         android:paddingBottom="4dp"
         android:textColor="@color/black"
         android:textSize="@dimen/text_small"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/tv_chat"
         app:layout_constraintTop_toBottomOf="@+id/tv_chat"
         tools:ignore="RtlSymmetry"

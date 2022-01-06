@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -104,6 +105,14 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
 
         collectLatestLifecycleFlow(viewModel.userData) {
             adapter?.submitList(it)
+
+            binding.notFoundAnimation.isVisible = it.isEmpty()
+
+            if( it.isEmpty() )
+                binding.notFoundAnimation.playAnimation()
+            else
+                binding.notFoundAnimation.cancelAnimation()
+
         }
 
         collectLatestLifecycleFlow(activityViewModel.refreshConnectionList){

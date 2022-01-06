@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -122,6 +123,12 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
                     binding.rvChat.scrollToPosition(it.size - 1)
                 }
             }
+
+            binding.emptyView.isVisible = it.isEmpty()
+            if( it.isEmpty() )
+                binding.emptyView.playAnimation()
+            else
+                binding.emptyView.cancelAnimation()
         }
     }
 

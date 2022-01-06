@@ -11,18 +11,18 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
-            app:menu="@menu/menu_chat"
+            android:background="@drawable/curved_toolbar"
             android:backgroundTint="?colorPrimary"
-            android:background="@drawable/curved_toolbar">
+            app:menu="@menu/menu_chat">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -46,10 +46,10 @@
                     android:id="@+id/iv_user"
                     android:layout_width="@dimen/toolbar_img_height"
                     android:layout_height="@dimen/toolbar_img_height"
-                    android:maxHeight="@dimen/item_img_max_height"
-                    android:scaleType="fitCenter"
-                    android:padding="5dp"
                     android:layout_marginHorizontal="@dimen/base_padding"
+                    android:maxHeight="@dimen/item_img_max_height"
+                    android:padding="5dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_round_person_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_back"
@@ -59,13 +59,13 @@
                     app:strokeWidth="1dp" />
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_user"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/base_padding"
                     android:gravity="center"
-                    android:id="@+id/tv_user"
                     android:textColor="?colorOnPrimary"
                     android:textSize="@dimen/toolbar_text"
-                    android:layout_marginHorizontal="@dimen/base_padding"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_user"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -91,6 +91,18 @@
         app:layout_constraintVertical_bias="0.0"
         app:stackFromEnd="true" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_chat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rv_chat"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:lottie_loop="true"
+        android:paddingHorizontal="@dimen/base_padding_large"
+        app:lottie_rawRes="@raw/tumbleweed_rolling" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tv_send"
         android:layout_width="0dp"
@@ -100,7 +112,6 @@
         android:hint="@string/message"
         android:imeOptions="actionSend"
         android:inputType="textImeMultiLine"
-        android:layout_marginHorizontal="@dimen/base_padding"
         android:paddingHorizontal="16dp"
         android:paddingVertical="@dimen/base_padding"
         android:textColor="@color/white"

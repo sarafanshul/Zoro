@@ -19,6 +19,6 @@ abstract class ChatViewHolder<VB : ViewBinding>(
     @SuppressLint("SimpleDateFormat")
     protected val formatter = SimpleDateFormat("HH:mm")
 
-    abstract fun bind( message: Message ,onClickCallback: (m : Message ,c : ClickType) -> Unit)
+    abstract fun bind( message: Message ,nextIsSame : Boolean ,onClickCallback: (m : Message ,c : ClickType) -> Unit)
 
 }

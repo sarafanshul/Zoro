@@ -42,4 +42,13 @@
 
     </com.projectdelta.zoro.util.widget.ThemedSwipeRefreshLayout>
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/sad_empty_box"
+        android:id="@+id/not_found_animation"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
