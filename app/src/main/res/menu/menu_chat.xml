@@ -4,6 +4,7 @@
     <item
         android:id="@+id/action_remove"
         android:title="@string/action_remove"
+        android:iconTint="?colorOnSurface"
         android:menuCategory="secondary"
         android:icon="@drawable/ic_round_leak_remove_24"/>
 

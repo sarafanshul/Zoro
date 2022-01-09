@@ -33,7 +33,7 @@ class MainViewModel @Inject constructor(
     private val _newMessage = MutableSharedFlow<Message?>()
     val newMessage = _newMessage.asSharedFlow()
 
-    private val _bottomNavVisibility = MutableSharedFlow<Int>()
+    private val _bottomNavVisibility = MutableSharedFlow<Int>(replay = 1)
 
     val bottomNavVisibility = _bottomNavVisibility.asSharedFlow()
 

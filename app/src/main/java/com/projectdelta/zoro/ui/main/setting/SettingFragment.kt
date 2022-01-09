@@ -55,7 +55,7 @@ class SettingFragment : BaseViewBindingFragment<FragmentSettingBinding>() {
 
         binding.version.text = "Zoro\nv${BuildConfig.VERSION_NAME}"
 
-        binding.ivBack.setOnClickListener {
+        binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
     }

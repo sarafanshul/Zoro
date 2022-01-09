@@ -1,62 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:animateLayoutChanges="true"
-    android:padding="@dimen/item_padding">
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="@dimen/item_img_max_height"
-        android:layout_height="@dimen/item_img_max_height"
-        android:scaleType="center"
-        app:strokeColor="@color/black"
-        app:strokeWidth="1dp"
-        android:id="@+id/iv_user"
-        android:padding="@dimen/base_padding"
-        android:src="@drawable/ic_round_person_24"
-        android:maxHeight="@dimen/item_img_max_height"
-        app:shapeAppearanceOverlay="@style/roundedImageView" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardElevation="0dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/base_padding"
+    android:backgroundTint="?colorSurface">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.7"
-        android:layout_gravity="center_vertical"
-        android:paddingHorizontal="@dimen/base_padding"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:animateLayoutChanges="true"
+        android:padding="@dimen/item_padding">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/item_img_max_height"
+            android:layout_height="@dimen/item_img_max_height"
+            android:scaleType="center"
+            app:strokeColor="?colorOnSurface"
+            app:strokeWidth="1dp"
+            android:id="@+id/iv_user"
+            tools:src="@tools:sample/avatars"
+            android:padding="@dimen/base_padding_small"
+            android:src="@drawable/ic_round_person_24"
+            android:maxHeight="@dimen/item_img_max_height"
+            app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="@dimen/base_padding"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_title"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                tools:text="@tools:sample/lorem"
+                android:textColor="?colorOnSurface"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_sub_title"
+                tools:text="@tools:sample/lorem/random"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:textColor="?colorOnSurface"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_title"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:singleLine="true"
-            android:ellipsize="marquee"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:id="@+id/tv_sub_title"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"/>
+            android:id="@+id/tv_badge"
+            android:layout_gravity="center_vertical"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/rounded_rect_bg"
+            android:gravity="center"
+            tools:text="2"
+            android:visibility="visible"
+            android:elevation="4dp"
+            android:textColor="?colorPrimary"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:textSize="11sp" />
 
     </LinearLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_badge"
-        android:layout_gravity="center_vertical"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/circle_bg"
-        android:gravity="center"
-        android:visibility="gone"
-        android:elevation="4dp"
-        android:textColor="@color/black"
-        android:padding="4dp"
-        android:textSize="11sp" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

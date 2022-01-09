@@ -31,5 +31,23 @@
     <color name="dateTimeHeader">#4a4a4a</color>
     <color name="lightTeal">#d2ffff</color>
 
+
+    <!--    Theme Colors    -->
     <color name="something_yellow">#F17A0A</color>
+    
+    <color name="something_green">#00A389</color>
+    <color name="something_green_light">#00D6B4</color>
+    <color name="something_green_dark">#007F6B</color>
+    <color name="something_green_ripple">#3300A389</color>
+
+    <color name="something_purple">#3800A3</color>
+    <color name="something_purple_light">#4A00D6</color>
+    <color name="something_purple_ripple">#4D3800A3</color>
+
+    <color name="dark_foreground">#1E1D2A</color>
+    <color name="dark_background">#15141D</color>
+    
+    <color name="light_foreground">#ffffff</color>
+    <color name="light_background">#F3F3F3</color>
+    
 </resources>

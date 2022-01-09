@@ -5,12 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.databinding.FragmentHomeBinding
@@ -20,6 +17,7 @@ import com.projectdelta.zoro.ui.main.home.adapter.HomeRecyclerViewAdapter
 import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
 import com.projectdelta.zoro.util.system.lang.launchIO
 import com.projectdelta.zoro.util.system.lang.safeNavigate
+import com.projectdelta.zoro.util.widget.SpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -64,17 +62,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
         setSearchBar()
 
         binding.userRv.adapter = adapter
-        binding.userRv.addItemDecoration(
-            DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL).apply {
-                setDrawable(
-                    ResourcesCompat.getDrawable(
-                        resources,
-                        R.drawable.item_rv_divider,
-                        null
-                    )!!
-                )
-            }
-        )
+        binding.userRv.addItemDecoration( SpaceItemDecoration() )
     }
 
     private fun setSearchBar() {

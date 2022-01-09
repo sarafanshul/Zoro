@@ -1,18 +1,53 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Zoro" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
-        <item name="fontFamily">@font/product_sans_font_family</item>
+        <!-- Primary colors. -->
+        <item name="colorPrimary">@color/something_green</item>
+        <item name="colorPrimaryVariant">@color/something_green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/something_purple</item>
+        <item name="colorSecondaryVariant">@color/something_purple_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Bars -->
+        <item name="android:statusBarColor" tools:targetApi="l">?android:colorBackground</item>
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+
+        <item name="rippleColor">@color/something_green_ripple</item>
+        <item name="itemRippleColor">@color/something_green_ripple</item>
+        <item name="tabRippleColor">@color/something_green_ripple</item>
+
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorSurface">@color/dark_foreground</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorAccent">?colorPrimary</item>
     </style>
+
+    <style name="Theme.Zoro.Dark" parent="Theme.Zoro">
+
+        <!-- Primary colors. -->
+        <item name="colorPrimary">@color/something_green</item>
+        <item name="colorPrimaryVariant">@color/something_green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/something_purple</item>
+        <item name="colorSecondaryVariant">@color/something_purple_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorAccent">?colorPrimary</item>
+
+        <!-- Bars -->
+        <item name="android:statusBarColor" tools:targetApi="l">?android:colorBackground</item>
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+
+        <item name="rippleColor">@color/something_green_ripple</item>
+        <item name="itemRippleColor">@color/something_green_ripple</item>
+        <item name="tabRippleColor">@color/something_green_ripple</item>
+
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorOnBackground">@color/insync_white</item>
+        <item name="colorSurface">@color/dark_foreground</item>
+        <item name="colorOnSurface">@color/insync_white</item>
+
+    </style>
+
 </resources>

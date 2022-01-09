@@ -11,4 +11,9 @@
         android:title="@string/user"
         android:icon="@drawable/ic_round_person_24"/>
 
+    <item
+        android:id="@+id/settingFragment"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_round_settings_24"/>
+
 </menu>

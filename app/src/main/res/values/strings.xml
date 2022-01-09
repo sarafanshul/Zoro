@@ -20,7 +20,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="hint_user_name">Your user name</string>
     <string name="biometrics">Biometrics</string>
-    <string name="about_dev">About Developers</string>
+    <string name="about_dev"><u>About Developers</u></string>
 
     <string name="action_webview_back">Back</string>
     <string name="action_webview_forward">Forward</string>

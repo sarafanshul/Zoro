@@ -18,9 +18,13 @@
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/home"
+            app:title="@string/app_name"
             app:menu="@menu/home"
-            android:backgroundTint="?colorPrimary"
+            app:titleTextColor="?colorOnSurface"
+            app:navigationIcon="@drawable/ic_round_chat_24"
+            app:navigationIconTint="?colorPrimary"
+            android:backgroundTint="?colorSurface"
+            android:theme="@style/customToolbar"
             android:background="@drawable/curved_toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -38,6 +42,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_home"
             tools:itemCount="7"
+            android:paddingTop="@dimen/base_padding"
             android:overScrollMode="ifContentScrolls"/>
 
     </com.projectdelta.zoro.util.widget.ThemedSwipeRefreshLayout>

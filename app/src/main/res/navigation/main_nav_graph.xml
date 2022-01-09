@@ -22,15 +22,7 @@
         android:id="@+id/userFragment"
         android:name="com.projectdelta.zoro.ui.main.user.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" >
-        <action
-            android:id="@+id/action_userFragment_to_settingFragment"
-            app:destination="@id/settingFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
+        tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.projectdelta.zoro.ui.main.chat.ChatFragment"

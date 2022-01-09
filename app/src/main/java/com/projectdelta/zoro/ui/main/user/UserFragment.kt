@@ -17,7 +17,6 @@ import com.projectdelta.zoro.R
 import com.projectdelta.zoro.databinding.FragmentUserBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
 import com.projectdelta.zoro.ui.main.MainViewModel
-import com.projectdelta.zoro.util.system.lang.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -101,18 +100,9 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
             integrator.initiateScan()
         }
 
-        binding.settings.setOnClickListener {
-            navigateSettingFragment()
-        }
     }
 
     private fun registerObservers() {}
-
-    private fun navigateSettingFragment(){
-        val action = UserFragmentDirections
-            .actionUserFragmentToSettingFragment()
-        safeNavigate(action)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)

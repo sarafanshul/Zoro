@@ -21,52 +21,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
-            android:backgroundTint="?colorPrimary"
-            android:background="@drawable/curved_toolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="@dimen/base_padding_small">
-
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="@dimen/toolbar_img_height"
-                    android:layout_height="@dimen/toolbar_img_height"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@string/home"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_round_arrow_back_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/tv_user"
-                    android:text="@string/settings"
-                    android:textSize="@dimen/toolbar_text"
-                    android:layout_marginHorizontal="@dimen/base_padding"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/iv_back"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
+            app:titleTextColor="?colorOnSurface"
+            app:navigationIconTint="?colorOnSurface"
+            app:navigationIcon="@drawable/ic_round_arrow_back_24"
+            app:title="@string/settings"
+            android:backgroundTint="?colorSurface"
+            android:background="@drawable/curved_toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_padding_large"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/theme"
         android:text="@string/set_theme"
-        android:textColor="?colorOnSecondary"
+        android:textColor="?colorOnBackground"
         android:paddingHorizontal="@dimen/base_padding_large"
         android:textSize="@dimen/text_medium"
         android:paddingVertical="@dimen/base_padding"
@@ -81,6 +54,7 @@
         android:id="@+id/biometrics"
         android:paddingHorizontal="@dimen/base_padding_large"
         android:textSize="@dimen/text_medium"
+        android:textColor="?colorOnBackground"
         android:text="@string/biometrics"
         android:layout_marginVertical="@dimen/base_padding_small"/>
 
@@ -97,7 +71,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/about"
         android:text="@string/about_dev"
-        android:textColor="?colorOnSecondary"
+        android:textColor="?colorOnSurface"
         android:paddingHorizontal="@dimen/base_padding_large"
         android:textSize="@dimen/text_medium"
         android:paddingVertical="@dimen/base_padding"
@@ -109,7 +83,8 @@
         android:paddingHorizontal="@dimen/base_padding_large"
         android:id="@+id/version"
         android:gravity="end"
-        android:text="@string/about_dev"
+        android:textColor="?colorOnSurface"
+        tools:text="Version Number\n 1.0.f"
         android:textSize="@dimen/text_small"
         android:paddingVertical="@dimen/base_padding"
         android:layout_marginVertical="@dimen/base_padding_small"/>

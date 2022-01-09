@@ -3,7 +3,7 @@
 
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+        <item name="cornerSize">20%</item>
     </style>
 
     <style name="Divider">
@@ -11,6 +11,13 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
-        <item name="android:background">@color/something_yellow</item>
+        <item name="android:background">?rippleColor</item>
+    </style>
+
+    <style name="customToolbar">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">?colorOnBackground</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">?colorPrimary</item>
     </style>
 </resources>

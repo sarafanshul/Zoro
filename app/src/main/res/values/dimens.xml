@@ -11,7 +11,7 @@
     <dimen name="toolbar_text">23sp</dimen>
     <dimen name="text_small">10sp</dimen>
     <dimen name="text_large">26sp</dimen>
-    <dimen name="text_medium">20sp</dimen>
+    <dimen name="text_medium">17sp</dimen>
     <dimen name="bottom_nav_height">57dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>

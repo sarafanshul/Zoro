@@ -14,7 +14,7 @@ class ZoroApplication : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(CustomDebugTree())
-//            setupStrictMode()
+            setupStrictMode()
         }
 
     }

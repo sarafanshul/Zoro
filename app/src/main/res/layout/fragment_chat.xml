@@ -21,7 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/curved_toolbar"
-            android:backgroundTint="?colorPrimary"
+            android:theme="@style/customToolbar"
+            app:titleTextColor="?colorOnSurface"
+            android:backgroundTint="?colorSurface"
             app:menu="@menu/menu_chat">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +42,8 @@
                     android:src="@drawable/ic_round_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?colorOnSurface" />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/iv_user"
@@ -50,7 +53,7 @@
                     android:maxHeight="@dimen/item_img_max_height"
                     android:padding="5dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_round_person_24"
+                    tools:src="@tools:sample/avatars"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_back"
                     app:layout_constraintTop_toTopOf="parent"
@@ -64,7 +67,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/base_padding"
                     android:gravity="center"
-                    android:textColor="?colorOnPrimary"
+                    android:textColor="?colorOnSurface"
+                    tools:text="@tools:sample/lorem"
                     android:textSize="@dimen/toolbar_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_user"
@@ -85,6 +89,7 @@
         android:paddingHorizontal="@dimen/base_padding"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/tv_send"
+        tools:listitem="@layout/item_chat_incoming"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar"
