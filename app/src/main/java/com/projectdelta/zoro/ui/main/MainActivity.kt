@@ -12,7 +12,12 @@ import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
 import com.projectdelta.zoro.ui.web.WebViewActivity
 import com.projectdelta.zoro.util.Constants.ALERT_NOTIFICATION_DURATION
 import com.projectdelta.zoro.util.NotFound
-import com.projectdelta.zoro.util.system.lang.*
+import com.projectdelta.zoro.util.system.lang.chop
+import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
+import com.projectdelta.zoro.util.system.lang.getResourceColor
+import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
+import com.projectdelta.zoro.util.system.lang.slideDown
+import com.projectdelta.zoro.util.system.lang.slideUp
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,10 +68,10 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
         collectLatestLifecycleFlow(viewModel.bottomNavVisibility) { integer ->
             when (integer) {
-                View.GONE -> binding.bottomPanel.slideDown{
+                View.GONE -> binding.bottomPanel.slideDown {
                     binding.bottomPanel.visibility = integer
                 }
-                View.VISIBLE -> binding.bottomPanel.slideUp{
+                View.VISIBLE -> binding.bottomPanel.slideUp {
                     binding.bottomPanel.visibility = integer
                 }
                 else -> throw NotFound.TheFuckHappened("Only GONE & VISIBLE state supported!")
@@ -79,7 +84,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         binding.bottomPanel.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-            if (destination.id in listOf(R.id.chatFragment ,R.id.settingFragment)) {
+            if (destination.id in listOf(R.id.chatFragment, R.id.settingFragment)) {
                 viewModel.hideBottomNav()
             } else {
                 viewModel.showBottomNav()
@@ -91,8 +96,8 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
     }
 
-    fun launchWebView(url : String ,title : String?){
-        WebViewActivity.newIntent(this ,url ,null ,title).also {
+    fun launchWebView(url: String, title: String?) {
+        WebViewActivity.newIntent(this, url, null, title).also {
             startActivity(it)
         }
     }

@@ -7,6 +7,8 @@ apply plugin: "kotlin-parcelize"
 
 apply plugin: "dagger.hilt.android.plugin"
 
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
 android {
     compileSdk 31
 
@@ -19,12 +21,12 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += ["room.incremental":"true"]
+                arguments += ["room.incremental": "true"]
                 arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
         buildFeatures {
-            viewBinding  true
+            viewBinding true
         }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -73,7 +75,7 @@ dependencies {
 
     // hilt
     implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt ("com.google.dagger:dagger-compiler:$hilt_version")
+    kapt("com.google.dagger:dagger-compiler:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     // glide
@@ -142,4 +144,23 @@ dependencies {
 
     // animations
     implementation 'com.airbnb.android:lottie:4.2.1'
+}
+
+tasks.named("detekt").configure {
+    reports {
+        xml.required.set(false)
+        xml.outputLocation.set(file("build/reports/detekt.xml"))
+        html.required.set(true)
+        html.outputLocation.set(file("build/reports/detekt.html"))
+        txt.required.set(false)
+        sarif.required.set(true)
+        sarif.outputLocation.set(file("build/reports/detekt.sarif"))
+    }
+}
+
+detekt {
+    toolVersion = detekt_version
+    config = files("$rootDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+    parallel = true
 }

@@ -1,7 +1,7 @@
 package com.projectdelta.zoro.util
 
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import java.util.*
+import java.util.UUID
 
 @Suppress("unused")
 object Constants {
@@ -37,7 +37,7 @@ object Constants {
     // Biometrics
     const val DEFAULT_BIOMETRIC_LEVEL = BIOMETRIC_STRONG
 
-    enum class BiometricStatus{
-        STATUS_SUCCESS ,STATUS_UNAVAILABLE ,STATUS_NONE_ENROLLED
+    enum class BiometricStatus {
+        STATUS_SUCCESS, STATUS_UNAVAILABLE, STATUS_NONE_ENROLLED
     }
 }

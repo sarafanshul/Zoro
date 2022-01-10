@@ -28,7 +28,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
     private var adapter: HomeRecyclerViewAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
-    private val activityViewModel : MainViewModel by activityViewModels()
+    private val activityViewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +62,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
         setSearchBar()
 
         binding.userRv.adapter = adapter
-        binding.userRv.addItemDecoration( SpaceItemDecoration() )
+        binding.userRv.addItemDecoration(SpaceItemDecoration())
     }
 
     private fun setSearchBar() {
@@ -96,15 +96,15 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
 
             binding.notFoundAnimation.isVisible = it.isEmpty()
 
-            if( it.isEmpty() )
+            if (it.isEmpty())
                 binding.notFoundAnimation.playAnimation()
             else
                 binding.notFoundAnimation.cancelAnimation()
 
         }
 
-        collectLatestLifecycleFlow(activityViewModel.refreshConnectionList){
-            if( it == MainViewModel.Companion.RefreshType.CONNECTION_LIST )
+        collectLatestLifecycleFlow(activityViewModel.refreshConnectionList) {
+            if (it == MainViewModel.Companion.RefreshType.CONNECTION_LIST)
                 viewModel.getPreferences()
             binding.swipeLayout.isRefreshing = false
         }

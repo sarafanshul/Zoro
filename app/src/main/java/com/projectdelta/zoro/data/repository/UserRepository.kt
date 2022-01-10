@@ -11,7 +11,7 @@ interface UserRepository {
 
     suspend fun getFriends(userId: String): List<User>
 
-    suspend fun addUser(user: User) : Boolean
+    suspend fun addUser(user: User): Boolean
 
-    suspend fun disconnectUser(connectionData: ConnectionData) : Boolean
+    suspend fun disconnectUser(connectionData: ConnectionData): Boolean
 }

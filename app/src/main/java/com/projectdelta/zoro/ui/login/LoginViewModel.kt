@@ -16,34 +16,48 @@ class LoginViewModel @Inject constructor(
     val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
-    inline fun requestNewUser(userName : String,
-        crossinline onSuccess : (User) -> Unit,
-        crossinline onFailure : () -> Unit,
-    ){
+    inline fun requestNewUser(
+        userName: String,
+        crossinline onSuccess: (User) -> Unit,
+        crossinline onFailure: () -> Unit,
+    ) {
         launchIO {
             val user = User(
                 id = Constants.generateUniqueUserId(),
-                name = userName ,
+                name = userName,
                 connections = listOf()
             )
             val status = userRepository.addUser(user)
-            if(status)
+            if (status)
                 onSuccess(user)
             else
                 onFailure()
         }
     }
 
-    inline fun updateUserPreferences( userPreferences: UserPreferences,
-                                      crossinline onSuccess : () -> Unit
+    inline fun updateUserPreferences(
+        userPreferences: UserPreferences,
+        crossinline onSuccess: () -> Unit
     ) = launchIO {
         preferencesManager.updateUserId(userPreferences.userId)
         preferencesManager.updateFirstLogin(userPreferences.firstLogin)
         preferencesManager.updateFirstLoginDate(userPreferences.firstLoginTime)
         preferencesManager.updateUserName(userPreferences.userName)
-    }.invokeOnCompletion { error : Throwable? ->
-        if( error == null )
+    }.invokeOnCompletion { error: Throwable? ->
+        if (error == null)
             onSuccess()
+    }
+
+    inline fun userExists(
+        userId: String,
+        crossinline onSuccess: () -> Unit,
+        crossinline onFailure: () -> Unit
+    ) = launchIO {
+        val userExists = userRepository.getUserById(userId)
+        if (userExists != null)
+            onSuccess()
+        else
+            onFailure()
     }
 
 }

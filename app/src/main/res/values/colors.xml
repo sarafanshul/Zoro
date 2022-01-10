@@ -34,7 +34,7 @@
 
     <!--    Theme Colors    -->
     <color name="something_yellow">#F17A0A</color>
-    
+
     <color name="something_green">#00A389</color>
     <color name="something_green_light">#00D6B4</color>
     <color name="something_green_dark">#007F6B</color>
@@ -46,8 +46,8 @@
 
     <color name="dark_foreground">#1E1D2A</color>
     <color name="dark_background">#15141D</color>
-    
+
     <color name="light_foreground">#ffffff</color>
     <color name="light_background">#F3F3F3</color>
-    
+
 </resources>

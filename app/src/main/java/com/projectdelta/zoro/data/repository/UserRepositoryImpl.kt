@@ -39,7 +39,7 @@ class UserRepositoryImpl(
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(Constants.WRONG_THREAD_EXCEPTION_IO)
 
-        return when ( val result : ApiResult<Boolean?> = api.connectUser(connectionData) ){
+        return when (val result: ApiResult<Boolean?> = api.connectUser(connectionData)) {
             is ApiResult.Success -> result.data ?: false
             else -> false
         }
@@ -50,7 +50,7 @@ class UserRepositoryImpl(
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(Constants.WRONG_THREAD_EXCEPTION_IO)
 
-        return when( val result : ApiResult<Boolean?> = api.addUser(user) ){
+        return when (val result: ApiResult<Boolean?> = api.addUser(user)) {
             is ApiResult.Success -> result.data ?: false
             else -> false
         }
@@ -61,7 +61,7 @@ class UserRepositoryImpl(
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(Constants.WRONG_THREAD_EXCEPTION_IO)
 
-        return when( val result : ApiResult<Boolean?> = api.disconnectUser(connectionData) ){
+        return when (val result: ApiResult<Boolean?> = api.disconnectUser(connectionData)) {
             is ApiResult.Success -> result.data ?: false
             else -> false
         }

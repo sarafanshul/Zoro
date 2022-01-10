@@ -1,8 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.6.0"
-    ext.hilt_version = '2.40.5'
-    ext.nav_version = '2.4.0-rc01'
+    ext {
+        kotlin_version = "1.6.0"
+        hilt_version = '2.40.5'
+        nav_version = '2.4.0-rc01'
+        detekt_version = '1.19.0'
+    }
     repositories {
         google()
         mavenCentral()
@@ -12,6 +15,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     }
 }
 

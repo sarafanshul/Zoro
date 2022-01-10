@@ -2,7 +2,12 @@
 
 package com.projectdelta.zoro.data.local
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import com.projectdelta.zoro.data.model.Message
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -17,7 +22,7 @@ abstract class MessageDao {
     abstract fun updateMessage(message: Message)
 
     @Query("UPDATE MESSAGE_TABLE SET seen =:seen WHERE senderId =:senderId AND seen !=:seen")
-    abstract fun updateMessageByUserIdSeen(senderId: String ,seen: Boolean)
+    abstract fun updateMessageByUserIdSeen(senderId: String, seen: Boolean)
 
     @Delete
     abstract fun deleteMessage(message: Message)
@@ -49,7 +54,7 @@ abstract class MessageDao {
     abstract fun getAllMessagesFilteredBySeenAndSenderOffline(
         senderId: String,
         seen: Boolean
-    ) : List<Message>
+    ): List<Message>
 
     @Query("DELETE FROM MESSAGE_TABLE WHERE seen =:seen")
     abstract fun deleteAllMessagesFilteredBySeen(seen: Boolean)

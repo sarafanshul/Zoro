@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingFragment : BaseViewBindingFragment<FragmentSettingBinding>() {
 
-    private val viewModel : SettingViewModel by viewModels()
+    private val viewModel: SettingViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
         _binding = FragmentSettingBinding.inflate(inflater)

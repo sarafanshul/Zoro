@@ -11,6 +11,8 @@ object QRGenerator {
 
     private const val IMAGE_SIZE = 700
     private const val BORDER_WIDTH = 20
+    private const val DEFAULT_DARK_COLOR = 0xFF007F6B.toInt() // cyan
+    private const val DEFAULT_EMPTY_COLOR = 0xFFFFFFFF.toInt() // white
 
     /**
      * Experimental
@@ -22,9 +24,9 @@ object QRGenerator {
     ): RenderOption {
 
         val color = Color()
-        color.light = 0xFFFFFFFF.toInt() // for blank spaces
-        color.dark = 0xFFFF1600.toInt() // for non-blank spaces
-        color.background = 0xFFFFFFFF.toInt()
+        color.light = DEFAULT_EMPTY_COLOR // for blank spaces
+        color.dark = DEFAULT_DARK_COLOR // for non-blank spaces
+        color.background = DEFAULT_EMPTY_COLOR
 //        color.auto = true
 
         val background = BlendBackground()
@@ -42,7 +44,7 @@ object QRGenerator {
         renderOption.color = color
         renderOption.background = background
 
-        if( logoImage != null ){
+        if (logoImage != null) {
             val logo = Logo()
             logo.bitmap = logoImage
             logo.borderRadius = 10 // radius for logo's corners

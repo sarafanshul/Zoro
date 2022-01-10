@@ -38,7 +38,7 @@
         android:visibility="gone"
         android:paddingStart="16dp"
         android:paddingBottom="4dp"
-        tools:text = "@tools:sample/lorem"
+        tools:text="@tools:sample/lorem"
         tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
     private val viewModel: UserViewModel by viewModels()
     private val activityViewModel: MainViewModel by activityViewModels()
 
-    private var displayBitmap : Bitmap? = null
+    private var displayBitmap: Bitmap? = null
 
     @SuppressLint("SimpleDateFormat")
     private val formatter = SimpleDateFormat("dd MMMM yy")

@@ -27,7 +27,7 @@ class HomeRecyclerViewAdapter(
                     onClickCallback(user)
                 }
 
-                loadUserProfileImage(ivUser ,user.id!!)
+                loadUserProfileImage(ivUser, user.id!!)
 
                 tvTitle.text = user.name
                 tvTitle.isSelected = true

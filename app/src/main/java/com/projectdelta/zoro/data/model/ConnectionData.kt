@@ -6,9 +6,9 @@ package com.projectdelta.zoro.data.model
  * @param receiverUser connection receiver id
  */
 data class ConnectionData(
-    val senderUser : String? = null,
-    val receiverUser : String? = null,
-) : BaseDataModel(){
+    val senderUser: String? = null,
+    val receiverUser: String? = null,
+) : BaseDataModel() {
 
     override fun copy() =
         ConnectionData(senderUser, receiverUser)

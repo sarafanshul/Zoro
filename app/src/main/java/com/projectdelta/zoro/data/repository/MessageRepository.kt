@@ -14,7 +14,7 @@ interface MessageRepository {
 
     suspend fun updateMessageToDatabase(message: Message)
 
-    suspend fun updateMessageByUserIdSeen(userId : String ,seen: Boolean)
+    suspend fun updateMessageByUserIdSeen(userId: String, seen: Boolean)
 
     suspend fun deleteMessageFromDatabase(message: Message)
 
@@ -28,7 +28,7 @@ interface MessageRepository {
     suspend fun getAllMessagesFilteredBySeenAndSenderOffline(
         senderId: String,
         seen: Boolean
-    ) : List<Message>
+    ): List<Message>
 
     suspend fun deleteAllMessagesFilteredBySeen(isSeen: Boolean)
 }

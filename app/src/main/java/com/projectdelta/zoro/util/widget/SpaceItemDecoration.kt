@@ -17,7 +17,12 @@ import com.projectdelta.zoro.util.system.lang.dp
  */
 class SpaceItemDecoration(private val space: Int = 10.dp) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
 
         outRect.left = space
         outRect.right = space

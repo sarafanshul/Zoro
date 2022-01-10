@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +24,7 @@
             app:navigationIconTint="?colorPrimary"
             android:backgroundTint="?colorSurface"
             android:theme="@style/customToolbar"
-            android:background="@drawable/curved_toolbar"/>
+            android:background="@drawable/curved_toolbar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -43,7 +42,7 @@
             tools:listitem="@layout/item_home"
             tools:itemCount="7"
             android:paddingTop="@dimen/base_padding"
-            android:overScrollMode="ifContentScrolls"/>
+            android:overScrollMode="ifContentScrolls" />
 
     </com.projectdelta.zoro.util.widget.ThemedSwipeRefreshLayout>
 

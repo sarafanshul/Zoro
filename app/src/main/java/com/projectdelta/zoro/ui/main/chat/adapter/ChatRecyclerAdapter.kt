@@ -11,17 +11,17 @@ import com.projectdelta.zoro.util.NotFound
 import com.projectdelta.zoro.util.callback.MessageDiffUtilCallback
 
 class ChatRecyclerAdapter(
-    private val onClickCallback: (m : Message, c : ClickType) -> Unit
-) : ListAdapter<Message ,ChatViewHolder<*>>( MessageDiffUtilCallback ) {
+    private val onClickCallback: (m: Message, c: ClickType) -> Unit
+) : ListAdapter<Message, ChatViewHolder<*>>(MessageDiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder<*> {
-        return when( viewType ){
-            Message.Companion.MessageType.INCOMING.ordinal ->{
+        return when (viewType) {
+            Message.Companion.MessageType.INCOMING.ordinal -> {
                 val binding = ItemChatIncomingBinding
                     .inflate(LayoutInflater.from(parent.context), parent, false)
                 ChatIncomingViewHolder(binding)
             }
-            Message.Companion.MessageType.OUTGOING.ordinal ->{
+            Message.Companion.MessageType.OUTGOING.ordinal -> {
                 val binding = ItemChatOutgoingBinding
                     .inflate(LayoutInflater.from(parent.context), parent, false)
                 ChatOutgoingViewHolder(binding)
@@ -32,11 +32,11 @@ class ChatRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder<*>, position: Int) {
-        val nextIsSame : Boolean =
-            if( position + 1 < itemCount )
+        val nextIsSame: Boolean =
+            if (position + 1 < itemCount)
                 getItem(position + 1).type == getItem(position).type
             else false
-        holder.bind(getItem(position) ,nextIsSame , onClickCallback)
+        holder.bind(getItem(position), nextIsSame, onClickCallback)
     }
 
     override fun getItemViewType(position: Int): Int {

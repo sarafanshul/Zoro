@@ -20,7 +20,8 @@ class CustomDebugTree : Timber.DebugTree() {
      * Returns a clickable Android Studio link
      */
     override fun createStackElementTag(element: StackTraceElement): String =
-        String.format("%4\$s.%1\$s(%2\$s:%3\$s)",
+        String.format(
+            "%4\$s.%1\$s(%2\$s:%3\$s)",
             element.methodName,
             element.fileName,
             element.lineNumber,

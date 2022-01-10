@@ -11,7 +11,9 @@ import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
 import com.projectdelta.zoro.util.system.lang.getValueOrNull
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,6 +25,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val userId = preferencesManager.preferenceFlow.getValueBlockedOrNull()?.userId
+
     init {
         getPreferences()
         getUnreadMessages()

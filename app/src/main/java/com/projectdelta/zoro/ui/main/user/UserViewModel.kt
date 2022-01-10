@@ -22,9 +22,9 @@ class UserViewModel @Inject constructor(
     val userPreferences: UserPreferences?
         get() = preferencesManager.preferenceFlow.getValueBlockedOrNull()
 
-    private var _renderOption : RenderOption? = null
-    fun getRenderOption( bitmap: Bitmap ) : RenderOption{
-        if( _renderOption == null ){
+    private var _renderOption: RenderOption? = null
+    fun getRenderOption(bitmap: Bitmap): RenderOption {
+        if (_renderOption == null) {
             _renderOption = QRGenerator.generateRenderOptions(
                 content = userPreferences?.userId!!,
                 backgroundImage = bitmap
@@ -33,13 +33,15 @@ class UserViewModel @Inject constructor(
         return _renderOption!!
     }
 
-    fun connectUser( userId : String ,doAfter : suspend () -> Unit){
+    fun connectUser(userId: String, doAfter: suspend () -> Unit) {
         launchIO {
-            val x = userRepository.connectUser(ConnectionData(
-                senderUser = userPreferences?.userId,
-                receiverUser = userId
-            ))
-            if( x )
+            val x = userRepository.connectUser(
+                ConnectionData(
+                    senderUser = userPreferences?.userId,
+                    receiverUser = userId
+                )
+            )
+            if (x)
                 doAfter()
         }
     }

@@ -3,7 +3,7 @@
 package com.projectdelta.zoro.util.system.lang
 
 import android.text.Editable
-import java.util.*
+import java.util.Locale
 
 fun String.chop(count: Int, replacement: String = "..."): String {
     return if (length > count) {

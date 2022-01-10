@@ -21,9 +21,9 @@ class MainViewModel @Inject constructor(
     private val messageRepository: MessageRepository
 ) : ViewModel() {
 
-    companion object{
-        enum class RefreshType{
-            CONNECTION_LIST ,
+    companion object {
+        enum class RefreshType {
+            CONNECTION_LIST,
         }
     }
 
@@ -60,7 +60,7 @@ class MainViewModel @Inject constructor(
             amqpClient.consumeMessage(queueId) { m ->
                 viewModelScope.launch(Dispatchers.IO) {
                     messageRepository.insertMessageToDatabase(m!!)
-                    if( m.senderId != currentChatReceiver ) // don't fire while in room with same user
+                    if (m.senderId != currentChatReceiver) // don't fire while in room with same user
                         _newMessage.emit(m)
                 }
             }
@@ -73,9 +73,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setMessagesSeen( userId : String ){
+    fun setMessagesSeen(userId: String) {
         launchIO {
-            messageRepository.updateMessageByUserIdSeen(userId ,true)
+            messageRepository.updateMessageByUserIdSeen(userId, true)
         }
     }
 

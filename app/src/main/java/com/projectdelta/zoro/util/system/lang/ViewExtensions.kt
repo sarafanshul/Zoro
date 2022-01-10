@@ -16,7 +16,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.*
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.view.marginBottom
@@ -208,7 +212,7 @@ fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.updateList(list: List<T
 /**
  * Loads profile-image into ImageView and SubClasses using Glide
  */
-fun loadUserProfileImage(view : ImageView ,userId :String) =
+fun loadUserProfileImage(view: ImageView, userId: String) =
     Glide
         .with(view.context)
         .load(NetworkingConstants.getAvatarURIByUserId(userId))

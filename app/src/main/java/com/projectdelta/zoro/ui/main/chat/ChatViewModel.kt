@@ -46,7 +46,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun sendMessage(text : String , receiver : String) {
+    fun sendMessage(text: String, receiver: String) {
         launchIO {
             val message = Message(
                 receiverId = receiver,
@@ -54,7 +54,7 @@ class ChatViewModel @Inject constructor(
                 data = text
             )
             val newMessage = messageRepository.sendMessage(message)
-            if( newMessage?.messageData != null ) {
+            if (newMessage?.messageData != null) {
                 newMessage.messageData.type = Message.Companion.MessageType.OUTGOING
                 val messageList: MutableList<Message> =
                     _outgoingMessages.getValueOrNull()?.toMutableList() ?: mutableListOf()
@@ -64,15 +64,17 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun disconnectUser( otherUser : String ,doAfter : suspend () -> Unit ){
+    fun disconnectUser(otherUser: String, doAfter: suspend () -> Unit) {
         launchIO {
             val success = userRepository.disconnectUser(
                 ConnectionData(
-                    senderUser = userId!! ,
+                    senderUser = userId!!,
                     receiverUser = otherUser
                 )
             )
-            if( success ){ doAfter() }
+            if (success) {
+                doAfter()
+            }
         }
     }
 

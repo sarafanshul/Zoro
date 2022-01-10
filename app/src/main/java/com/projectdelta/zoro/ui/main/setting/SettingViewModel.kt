@@ -13,10 +13,10 @@ class SettingViewModel @Inject constructor(
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
-    val userPreferences : Flow<UserPreferences>
+    val userPreferences: Flow<UserPreferences>
         get() = preferencesManager.preferenceFlow
 
-    fun updateBiometricSetting( x : Boolean ) = launchIO {
+    fun updateBiometricSetting(x: Boolean) = launchIO {
         preferencesManager.updateBiometricStatus(x)
     }
 }

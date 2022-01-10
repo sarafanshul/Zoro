@@ -43,7 +43,11 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigator
@@ -460,8 +464,8 @@ fun ViewModel.launchIO(collect: suspend CoroutineScope.() -> Unit) =
  * Checks if Biometrics are available in the device
  * @return [Constants.BiometricStatus] as per status
  */
-val Context.biometricStatus : Constants.BiometricStatus
-    get() = when(BiometricManager.from(this).canAuthenticate(DEFAULT_BIOMETRIC_LEVEL)){
+val Context.biometricStatus: Constants.BiometricStatus
+    get() = when (BiometricManager.from(this).canAuthenticate(DEFAULT_BIOMETRIC_LEVEL)) {
         BiometricManager.BIOMETRIC_SUCCESS ->
             Constants.BiometricStatus.STATUS_SUCCESS
         BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
@@ -474,24 +478,29 @@ val Context.biometricStatus : Constants.BiometricStatus
  * [BiometricPrompt] builder for ease
  */
 inline fun AppCompatActivity.getBiometricPrompt(
-    crossinline onSuccess : () -> Unit,
-    crossinline onError : () -> Unit,
+    crossinline onSuccess: () -> Unit,
+    crossinline onError: (error: String) -> Unit,
 ): BiometricPrompt {
     val biometricPrompt = BiometricPrompt(this, mainExecutor,
         object : BiometricPrompt.AuthenticationCallback() {
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                Timber.e("${this::class.simpleName}, Biometric Auth ErrorCode : $errorCode\n" , errString )
-                onError()
+                Timber.e(
+                    "${this::class.simpleName}, Biometric Auth ErrorCode : $errorCode\n",
+                    errString
+                )
+                onError(errString.toString())
             }
+
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
                 onSuccess()
             }
+
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
                 Timber.e("${this::class.simpleName}, Biometric Auth failed")
-                onError()
+                onError("Biometric Auth failed")
             }
         })
     return biometricPrompt

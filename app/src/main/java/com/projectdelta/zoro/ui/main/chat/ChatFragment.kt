@@ -15,7 +15,12 @@ import com.projectdelta.zoro.databinding.FragmentChatBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
 import com.projectdelta.zoro.ui.main.MainViewModel
 import com.projectdelta.zoro.ui.main.chat.adapter.ChatRecyclerAdapter
-import com.projectdelta.zoro.util.system.lang.*
+import com.projectdelta.zoro.util.system.lang.chop
+import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
+import com.projectdelta.zoro.util.system.lang.isOk
+import com.projectdelta.zoro.util.system.lang.launchIO
+import com.projectdelta.zoro.util.system.lang.loadUserProfileImage
+import com.projectdelta.zoro.util.system.lang.toEditable
 import com.projectdelta.zoro.util.widget.SpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -28,10 +33,10 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
     private lateinit var receiver: User
 
-    private val viewModel : ChatViewModel by viewModels()
-    private val activityViewModel : MainViewModel by activityViewModels()
+    private val viewModel: ChatViewModel by viewModels()
+    private val activityViewModel: MainViewModel by activityViewModels()
 
-    private var adapter : ChatRecyclerAdapter? = null
+    private var adapter: ChatRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +48,7 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
         activityViewModel.currentChatReceiver = receiver.id!!
 
-        adapter = ChatRecyclerAdapter{ m ,c ->
+        adapter = ChatRecyclerAdapter { m, c ->
             Timber.d("${m.data} : ${c.name}")
         }
 
@@ -66,9 +71,9 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
     private fun setMenu() {
         binding.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.action_remove -> {
-                    viewModel.disconnectUser(receiver.id!!){
+                    viewModel.disconnectUser(receiver.id!!) {
                         activityViewModel.refreshConnectionList
                             .emit(MainViewModel.Companion.RefreshType.CONNECTION_LIST)
                         // emits but at that time homeView is not observing hence no List update , FIXIT later
@@ -90,7 +95,7 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
 
         binding.tvSend.setOnEditorActionListener { v, actionId, _ ->
             var handled = false
-            if( actionId == EditorInfo.IME_ACTION_SEND ){
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
                 sendMessage(v.text.toString())
                 handled = true
             }
@@ -101,31 +106,31 @@ class ChatFragment : BaseViewBindingFragment<FragmentChatBinding>() {
             requireActivity().onBackPressed()
         }
 
-        loadUserProfileImage(binding.ivUser ,receiver.id!!)
+        loadUserProfileImage(binding.ivUser, receiver.id!!)
 
         binding.tvUser.text = receiver.name?.chop(25)
 
     }
 
-    private fun sendMessage( text : String? ){
-        if( text.isOk() ) {
-            viewModel.sendMessage(text!! , receiver.id!!)
+    private fun sendMessage(text: String?) {
+        if (text.isOk()) {
+            viewModel.sendMessage(text!!, receiver.id!!)
             binding.tvSend.text = "".toEditable()
         }
     }
 
-    private fun registerObservers(){
-        collectLatestLifecycleFlow(viewModel.messages){
+    private fun registerObservers() {
+        collectLatestLifecycleFlow(viewModel.messages) {
             adapter?.submitList(it)
             launchIO {
-                if( it.isNotEmpty() && it.last().senderId != receiver.id ) { // scroll to last message after any UI (sender) update.
+                if (it.isNotEmpty() && it.last().senderId != receiver.id) { // scroll to last message after any UI (sender) update.
                     delay(100)
                     binding.rvChat.scrollToPosition(it.size - 1)
                 }
             }
 
             binding.emptyView.isVisible = it.isEmpty()
-            if( it.isEmpty() )
+            if (it.isEmpty())
                 binding.emptyView.playAnimation()
             else
                 binding.emptyView.cancelAnimation()

@@ -5,7 +5,12 @@ import com.google.gson.Gson
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.util.Constants
 import com.projectdelta.zoro.util.NotFound
-import com.rabbitmq.client.*
+import com.rabbitmq.client.AMQP
+import com.rabbitmq.client.Channel
+import com.rabbitmq.client.Connection
+import com.rabbitmq.client.ConnectionFactory
+import com.rabbitmq.client.DefaultConsumer
+import com.rabbitmq.client.Envelope
 import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.TimeoutException

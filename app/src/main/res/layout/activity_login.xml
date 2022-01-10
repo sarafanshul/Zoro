@@ -17,7 +17,7 @@
         android:maxLength="@integer/max_user_name_length"
         android:layout_marginHorizontal="@dimen/base_padding"
         android:hint="@string/hint_user_name"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:layout_width="match_parent"
@@ -28,6 +28,6 @@
         app:indicatorColor="@array/default_progress_bar_colors"
         android:indeterminate="true"
         app:indeterminateAnimationType="contiguous"
-        app:layout_anchorGravity="bottom"/>
+        app:layout_anchorGravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,21 +4,35 @@ import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.projectdelta.zoro.data.model.Message
+import com.projectdelta.zoro.util.system.lang.chop
 import java.text.SimpleDateFormat
+import java.util.Date
 
 abstract class ChatViewHolder<VB : ViewBinding>(
-    binding : VB
+    binding: VB
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    companion object{
-        enum class ClickType{
-            SHORT , LONG
+    companion object {
+        enum class ClickType {
+            SHORT, LONG
         }
+
+        const val MAX_CHAT_TEXT_LENGTH = 35
     }
 
     @SuppressLint("SimpleDateFormat")
-    protected val formatter = SimpleDateFormat("HH:mm")
+    private val formatter = SimpleDateFormat("HH:mm")
 
-    abstract fun bind( message: Message ,nextIsSame : Boolean ,onClickCallback: (m : Message ,c : ClickType) -> Unit)
+    abstract fun bind(
+        message: Message,
+        nextIsSame: Boolean,
+        onClickCallback: (m: Message, c: ClickType) -> Unit
+    )
+
+    protected fun formatMessageText(message: String?) =
+        " $message ".chop(MAX_CHAT_TEXT_LENGTH)
+
+    protected fun formatMessageDate(timeInMillis: Long?): String =
+        formatter.format(Date(timeInMillis ?: 0))
 
 }
