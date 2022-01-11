@@ -29,11 +29,6 @@
         <item name="colorAccent">?colorPrimary</item>
     </style>
 
-    <style name="Theme.Zoro.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="Theme.Zoro.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Zoro.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -64,6 +59,14 @@
 
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
+
+    </style>
+
+    <style name="Theme.Zoro.Splash" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">@color/light_foreground</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.Zoro</item>
 
     </style>
 

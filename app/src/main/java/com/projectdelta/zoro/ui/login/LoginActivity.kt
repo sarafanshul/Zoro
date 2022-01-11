@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.biometric.BiometricPrompt
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.preferences.UserPreferences
 import com.projectdelta.zoro.databinding.ActivityLoginBinding
@@ -19,11 +22,17 @@ import com.projectdelta.zoro.util.system.lang.getResourceColor
 import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
 import com.projectdelta.zoro.util.system.lang.isOk
 import com.projectdelta.zoro.util.system.lang.toEditable
+import com.projectdelta.zoro.util.work.UpdateDatabaseWorker
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
+
+    companion object{
+        private const val CANCEL_BIOMETRICS = "Cancel"
+    }
 
     private lateinit var biometricPrompt: BiometricPrompt
 
@@ -32,12 +41,21 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        installSplashScreen()
+
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         viewModel
 
         setContentView(binding.root)
 
+        setupWorker()
+
         initUI()
+    }
+
+    private fun setupWorker() {
+        WorkManager.getInstance(applicationContext)
+            .enqueue(UpdateDatabaseWorker.workerRequest)
     }
 
     private fun initUI() {
@@ -88,13 +106,16 @@ class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {
                 launchMainActivity()
             },
             onError@{ error ->
-                showError(error, "Please try again.")
+                if( error == CANCEL_BIOMETRICS )
+                    finish()
+                else
+                    showError(error, "Please try again.")
             }
         )
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Secure Login")
             .setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText("Cancel")
+            .setNegativeButtonText(CANCEL_BIOMETRICS)
             .build()
 
         biometricPrompt.authenticate(promptInfo)

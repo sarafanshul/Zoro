@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.projectdelta.zoro.BuildConfig
 import com.projectdelta.zoro.databinding.FragmentSettingBinding
 import com.projectdelta.zoro.ui.base.BaseViewBindingFragment
@@ -57,6 +58,12 @@ class SettingFragment : BaseViewBindingFragment<FragmentSettingBinding>() {
 
         binding.toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        binding.theme.setOnClickListener {
+            Snackbar
+                .make(binding.root ,"Coming Soon..." ,Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 
