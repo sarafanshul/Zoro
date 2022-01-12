@@ -57,7 +57,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_back"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/roundedImageView"
+                    app:shapeAppearanceOverlay="@style/roundedRectImageView"
                     app:strokeColor="@color/black"
                     app:strokeWidth="1dp" />
 

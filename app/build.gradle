@@ -146,6 +146,9 @@ dependencies {
     def work_version = "2.7.1"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    // Material Dialog
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+
     // testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.room:room-testing:$room_version"

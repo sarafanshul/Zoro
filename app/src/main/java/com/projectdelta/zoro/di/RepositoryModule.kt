@@ -7,10 +7,12 @@ import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.data.repository.MessageRepositoryImpl
 import com.projectdelta.zoro.data.repository.UserRepository
 import com.projectdelta.zoro.data.repository.UserRepositoryImpl
+import com.projectdelta.zoro.di.qualifiers.IODispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -20,9 +22,11 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideMessageRepository(
-        api: MessageApi, messageDao: MessageDao
+        api: MessageApi,
+        messageDao: MessageDao,
+        @IODispatcher dispatcher : CoroutineDispatcher
     ): MessageRepository {
-        return MessageRepositoryImpl(api, messageDao)
+        return MessageRepositoryImpl(api, messageDao, dispatcher)
     }
 
     @Singleton

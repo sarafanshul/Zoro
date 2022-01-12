@@ -5,14 +5,18 @@ import com.projectdelta.zoro.data.local.MessageDao
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.data.model.MessageReturn
 import com.projectdelta.zoro.data.remote.MessageApi
+import com.projectdelta.zoro.di.qualifiers.IODispatcher
 import com.projectdelta.zoro.util.Constants.WRONG_THREAD_EXCEPTION_IO
 import com.projectdelta.zoro.util.NotFound
 import com.projectdelta.zoro.util.networking.apiCallAdapter.ApiResult
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class MessageRepositoryImpl(
     private val api: MessageApi,
-    private val dao: MessageDao
+    private val dao: MessageDao,
+    @IODispatcher private val workerDispatcher : CoroutineDispatcher,
 ) : MessageRepository {
 
     @Throws(NotFound.ItsYourFaultIdiotException::class)
@@ -74,7 +78,9 @@ class MessageRepositoryImpl(
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)
 
-        return dao.getAllMessagesFilteredBySeen(isSeen)
+        return dao
+            .getAllMessagesFilteredBySeen(isSeen)
+            .flowOn(workerDispatcher)
     }
 
     @Throws(NotFound.ItsYourFaultIdiotException::class)
@@ -85,7 +91,9 @@ class MessageRepositoryImpl(
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(WRONG_THREAD_EXCEPTION_IO)
 
-        return dao.getAllMessagesFilteredBySeenAndSender(senderId, seen)
+        return dao
+            .getAllMessagesFilteredBySeenAndSender(senderId, seen)
+            .flowOn(workerDispatcher)
     }
 
     override suspend fun getAllMessagesFilteredBySeenAndSenderOffline(

@@ -11,26 +11,44 @@
         android:layout_width="@dimen/item_img_max_height"
         android:layout_height="@dimen/item_img_max_height"
         android:contentDescription="@string/action_search"
-        android:src="@drawable/ic_round_qr_code_scanner_24"
+        android:src="@drawable/ic_round_flip_24"
         android:tooltipText="@string/action_scan"
-        app:layout_constraintBottom_toTopOf="@+id/iv_qr"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/user_image"
+        app:layout_constraintEnd_toStartOf="@+id/qr"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?colorPrimary" />
 
+
     <ImageView
-        android:id="@+id/iv_qr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/qr"
+        android:layout_width="@dimen/item_img_max_height"
+        android:layout_height="@dimen/item_img_max_height"
+        android:contentDescription="@string/action_search"
+        android:src="@drawable/ic_round_qr_code_scanner_24"
+        android:tooltipText="@string/action_scan"
+        app:layout_constraintBottom_toTopOf="@+id/user_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/scan"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?colorPrimary" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/user_image"
+        android:layout_width="@dimen/image_max_width"
+        android:layout_height="@dimen/image_max_width"
         android:layout_gravity="center"
         android:contentDescription="@string/action_search"
+        android:padding="@dimen/base_padding_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/base_padding_large"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_name"
@@ -39,8 +57,9 @@
         android:gravity="center"
         android:text="@string/action_search"
         android:textColor="?colorOnSurface"
+        android:layout_marginTop="@dimen/base_padding_large"
         android:textSize="@dimen/text_large"
-        app:layout_constraintTop_toBottomOf="@+id/iv_qr" />
+        app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_date"

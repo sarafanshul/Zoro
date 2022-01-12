@@ -8,9 +8,10 @@ import androidx.work.WorkRequest
 import androidx.work.WorkerParameters
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.data.repository.MessageRepository
+import com.projectdelta.zoro.di.qualifiers.IODispatcher
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 /**
@@ -22,7 +23,8 @@ import kotlinx.coroutines.withContext
 class UpdateDatabaseWorker @AssistedInject constructor(
     @Assisted private val appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val repository: MessageRepository
+    private val repository: MessageRepository,
+    @IODispatcher private val dispatcher : CoroutineDispatcher,
 ) : CoroutineWorker(appContext, workerParams) {
 
     companion object{
@@ -32,7 +34,7 @@ class UpdateDatabaseWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
 
-        withContext(Dispatchers.IO){
+        withContext(dispatcher){
             repository.deleteAllMessagesFilteredBySeen(true)
         }
         return Result.success()

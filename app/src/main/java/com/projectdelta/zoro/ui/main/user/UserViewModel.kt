@@ -22,6 +22,8 @@ class UserViewModel @Inject constructor(
     val userPreferences: UserPreferences?
         get() = preferencesManager.preferenceFlow.getValueBlockedOrNull()
 
+    var qrBitmap : Bitmap? = null
+
     private var _renderOption: RenderOption? = null
     fun getRenderOption(bitmap: Bitmap): RenderOption {
         if (_renderOption == null) {
