@@ -1,9 +1,11 @@
 package com.projectdelta.zoro.util.networking
 
+import com.projectdelta.zoro.BuildConfig
+
 object NetworkingConstants {
 
     // Avatar API
-    private const val AVATAR_API = "https://avatars.dicebear.com/api/adventurer/"
+    private const val AVATAR_API = BuildConfig.AVATAR_API
     fun getAvatarURIByUserId(userId: String): String =
         "$AVATAR_API$userId.png"
 
@@ -11,13 +13,13 @@ object NetworkingConstants {
     const val DEV_PROFILE = "https://github.com/sarafanshul"
 
     // RabbitMQ API
-    const val RABBIT_API = "10.0.2.2"
-    const val RABBIT_PORT = 5672
-    const val RABBIT_USER_NAME = "guest"
-    const val RABBIT_USER_PASSWORD = "guest"
+    const val RABBIT_API = BuildConfig.RABBITMQ_HOST
+    val RABBIT_PORT = BuildConfig.RABBITMQ_PORT.toInt()
+    const val RABBIT_USER_NAME = BuildConfig.RABBIT_USER_NAME
+    const val RABBIT_USER_PASSWORD = BuildConfig.RABBIT_USER_PASSWORD
 
     // Luffy API
-    const val BASE_URL = "http://10.0.2.2:8080"
+    const val BASE_URL = BuildConfig.API_BASE_URL
 
     const val USER_URL = "user/"
     const val MESSAGE_URL = "message/"

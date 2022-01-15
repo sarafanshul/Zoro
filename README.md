@@ -11,6 +11,7 @@
 	- Inside `NetworkingConstants.kt` configure your backend constants
 	- Replace the keystore  from `app/keystore/ZoroKeyStore.jks`with your signed one.
 	- Setup Detekt (not forced but recommended)
+	- Setup Configs in `local.properties`
 - Android Studio specific
 	- Invalidate Cache (just to be safe)
 	- Build and add magic

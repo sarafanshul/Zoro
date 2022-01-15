@@ -74,6 +74,8 @@ class RabbitMQClient(
         factory.port = port
         factory.username = uName
         factory.password = password
+        if( port == 5671 )
+            factory.useSslProtocol()
     }
 
     override fun registerChannel() {

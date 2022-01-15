@@ -17,7 +17,7 @@ android {
         minSdk 28
         targetSdk 31
         versionCode 1
-        versionName "1.0-beta"
+        versionName "1.0"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -28,6 +28,13 @@ android {
         buildFeatures {
             viewBinding true
         }
+
+        buildConfigField "String", "API_BASE_URL", "\""+getBaseUrl()+"\""
+        buildConfigField "String", "AVATAR_API", "\""+getAvatarApi()+"\""
+        buildConfigField "String", "RABBITMQ_HOST", "\""+getRabbitHost()+"\""
+        buildConfigField "String", "RABBITMQ_PORT", "\""+getRabbitPort()+"\""
+        buildConfigField "String", "RABBIT_USER_NAME", "\""+getRabbitUsername()+"\""
+        buildConfigField "String", "RABBIT_USER_PASSWORD", "\""+getRabbitPassword()+"\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +62,42 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+def getBaseUrl() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("API_BASE_URL")
+}
+
+def getAvatarApi() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("AVATAR_API")
+}
+
+def getRabbitHost() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("RABBITMQ_HOST")
+}
+
+def getRabbitPort() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("RABBITMQ_PORT")
+}
+
+def getRabbitUsername() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("RABBIT_USER_NAME")
+}
+
+def getRabbitPassword() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    return properties.getProperty("RABBIT_USER_PASSWORD")
 }
 
 dependencies {
