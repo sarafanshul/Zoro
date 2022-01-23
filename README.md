@@ -4,8 +4,7 @@
   <a href="https://devlibrary.withgoogle.com/products/android/repos/skydoves-pokedex"><img alt="Google" src="https://skydoves.github.io/badges/google-devlib.svg"/></a><br>
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=27"><img alt="API" src="https://img.shields.io/badge/API-27%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/sarafanshul/Zoro/actions"><img alt="Build Status" src="
-https://github.com/sarafanshul/zoro/actions/workflows/android-release-artifact.yml/badge.svg"/></a> 
+  <a href="https://github.com/sarafanshul/Zoro/actions"><img alt="Build Status" src="https://github.com/sarafanshul/zoro/actions/workflows/android-release-artifact.yml/badge.svg"/></a> 
 </p>
 
 <p align="center">  
