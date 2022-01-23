@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.util.web
 
 import android.annotation.TargetApi

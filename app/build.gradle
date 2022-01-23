@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.ui.main.chat.adapter
 
 import android.annotation.SuppressLint
@@ -17,7 +21,7 @@ abstract class ChatViewHolder<VB : ViewBinding>(
             SHORT, LONG
         }
 
-        const val MAX_CHAT_TEXT_LENGTH = 35
+        const val MAX_CHAT_TEXT_LENGTH = 500
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -29,8 +33,8 @@ abstract class ChatViewHolder<VB : ViewBinding>(
         onClickCallback: (m: Message, c: ClickType) -> Unit
     )
 
-    protected fun formatMessageText(message: String?) =
-        " $message ".chop(MAX_CHAT_TEXT_LENGTH)
+    protected fun formatMessageText(message: String? ,length : Int = MAX_CHAT_TEXT_LENGTH) =
+        " $message ".chop(length)
 
     protected fun formatMessageDate(timeInMillis: Long?): String =
         formatter.format(Date(timeInMillis ?: 0))

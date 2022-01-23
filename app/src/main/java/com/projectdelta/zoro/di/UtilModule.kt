@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.di
 
 import com.google.gson.Gson

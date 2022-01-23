@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.ui.main.chat.adapter
 
 import android.view.View

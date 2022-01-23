@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 @file:Suppress("DEPRECATION") // FIXME - IntentIntegrator/onActivityResult
 package com.projectdelta.zoro.ui.main.user
 

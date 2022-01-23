@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.util
 
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 @file:Suppress("unused")
 
 package com.projectdelta.zoro.util.system.lang

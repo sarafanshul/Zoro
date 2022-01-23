@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.ui.main
 
 import android.view.View
@@ -37,7 +41,7 @@ class MainViewModel @Inject constructor(
 
     val bottomNavVisibility = _bottomNavVisibility.asSharedFlow()
 
-    val refreshConnectionList = MutableSharedFlow<RefreshType>() // setting replay = 1 , solves the
+    val refreshConnectionList = MutableSharedFlow<RefreshType>() // setting replay = 1 , solves the problem of reload
 
     fun showBottomNav() {
         launchIO {

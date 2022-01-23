@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.util.networking.amqp
 
 import android.os.Looper
@@ -18,17 +22,17 @@ import java.util.concurrent.TimeoutException
 /**
  * AMQP connection Client for RabbitMQ
  *
- * To be used as a Singleton
- *
  * Usage
  * ```Kotlin
  * val client : RabbitMQClient = RabbitMQClient.getInstance( ..params.. )
  * client.registerChannel() // register is imp
  * ```
+ * *To be used as a Singleton*
  *
  * Known Bugs
  * - When connection in closed due to Socket Timeout (no internetConnection)
  * , unregister fails to close connection and channel.
+ * - Does not survives restart (due to change in theme etc)
  */
 class RabbitMQClient(
     host: String, port: Int,
@@ -68,7 +72,7 @@ class RabbitMQClient(
         setupConnection(host, port, uName, password)
     }
 
-    private fun setupConnection(host: String, port: Int, uName: String, password: String) {
+    override fun setupConnection(host: String, port: Int, uName: String, password: String) {
         factory = ConnectionFactory()
         factory.host = host
         factory.port = port

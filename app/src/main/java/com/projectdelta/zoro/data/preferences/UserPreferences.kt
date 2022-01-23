@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.data.preferences
 
 import com.projectdelta.zoro.data.model.BaseDataModel

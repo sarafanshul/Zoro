@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro.ui.main
 
 import android.os.Bundle
@@ -12,7 +16,6 @@ import com.projectdelta.zoro.ui.base.BaseViewBindingActivity
 import com.projectdelta.zoro.ui.web.WebViewActivity
 import com.projectdelta.zoro.util.Constants.ALERT_NOTIFICATION_DURATION
 import com.projectdelta.zoro.util.NotFound
-import com.projectdelta.zoro.util.system.lang.chop
 import com.projectdelta.zoro.util.system.lang.collectLatestLifecycleFlow
 import com.projectdelta.zoro.util.system.lang.getResourceColor
 import com.projectdelta.zoro.util.system.lang.getValueBlockedOrNull
@@ -59,7 +62,7 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
         collectLatestLifecycleFlow(viewModel.newMessage) {
             if (it != null)
                 Alerter.create(this@MainActivity)
-                    .setTitle("New Message from ${it.senderId?.chop(20)}")
+                    .setTitle("New Message from a friend.")// TODO( Fetch SenderName form server to display here )
                     .setText(it.data!!)
                     .setDuration(ALERT_NOTIFICATION_DURATION)
                     .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))

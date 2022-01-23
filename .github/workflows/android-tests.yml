@@ -14,9 +14,21 @@ jobs:
         run: chmod +x gradlew
       - name: Decode BASEURL
         run: echo API_BASE_URL=TEST > ./local.properties
-#        env:
-#          API_BASE_URL: ${{ secrets.API_BASE_URL }}
-#        run: echo API_BASE_URL=$API_BASE_URL > ./local.properties
+      - name: Config Luffy API
+        env:
+          Y: ${{secrets.API_BASE_URL}}
+        run: echo -e "API_BASE_URL=$Y \n" >> ./local.properties
+      - name: Config Avatar API
+        env:
+          X : ${{secrets.AVATAR_API}}
+        run: echo -e "AVATAR_API=$X \n" >> ./local.properties
+      - name: Config RabbitMQ
+        env:
+          A : ${{secrets.RABBITMQ_HOST}}
+          B : ${{secrets.RABBITMQ_PORT}}
+          C : ${{secrets.RABBIT_USER_NAME}}
+          D : ${{secrets.RABBIT_USER_PASSWORD}}
+        run: echo -e "RABBITMQ_HOST=$A\nRABBITMQ_PORT=$B\nRABBIT_USER_NAME=$C\nRABBIT_USER_PASSWORD=$D" >> ./local.properties
       - name: Unit tests
         run: ./gradlew test --stacktrace
 
@@ -28,9 +40,21 @@ jobs:
         run: chmod +x gradlew
       - name: Decode BASEURL
         run: echo API_BASE_URL=TEST > ./local.properties
-#        env:
-#          API_BASE_URL: ${{ secrets.API_BASE_URL }}
-#        run: echo API_BASE_URL=$API_BASE_URL > ./local.properties
+      - name: Config Luffy API
+        env:
+          Y: ${{secrets.API_BASE_URL}}
+        run: echo -e "API_BASE_URL=$Y \n" >> ./local.properties
+      - name: Config Avatar API
+        env:
+          X : ${{secrets.AVATAR_API}}
+        run: echo -e "AVATAR_API=$X \n" >> ./local.properties
+      - name: Config RabbitMQ
+        env:
+          A : ${{secrets.RABBITMQ_HOST}}
+          B : ${{secrets.RABBITMQ_PORT}}
+          C : ${{secrets.RABBIT_USER_NAME}}
+          D : ${{secrets.RABBIT_USER_PASSWORD}}
+        run: echo -e "RABBITMQ_HOST=$A\nRABBITMQ_PORT=$B\nRABBIT_USER_NAME=$C\nRABBIT_USER_PASSWORD=$D" >> ./local.properties
       - name: Setup Java
         uses: actions/setup-java@v2
         with:

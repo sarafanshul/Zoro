@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022. Anshul Saraf
+ */
+
 package com.projectdelta.zoro
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
