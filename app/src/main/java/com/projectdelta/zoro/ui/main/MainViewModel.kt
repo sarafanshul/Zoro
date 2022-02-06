@@ -6,17 +6,14 @@ package com.projectdelta.zoro.ui.main
 
 import android.view.View
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.projectdelta.zoro.data.model.Message
 import com.projectdelta.zoro.data.model.User
 import com.projectdelta.zoro.data.repository.MessageRepository
 import com.projectdelta.zoro.util.networking.amqp.AMQPClient
 import com.projectdelta.zoro.util.system.lang.launchIO
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -59,10 +56,9 @@ class MainViewModel @Inject constructor(
      * @param queueId [User.id]
      */
     fun registerClient(queueId: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            amqpClient.registerChannel()
-            amqpClient.consumeMessage(queueId) { m ->
-                viewModelScope.launch(Dispatchers.IO) {
+        launchIO {
+            amqpClient.registerAndConsume(queueId){ m ->
+                launchIO {
                     messageRepository.insertMessageToDatabase(m!!)
                     if (m.senderId != currentChatReceiver) // don't fire while in room with same user
                         _newMessage.emit(m)
@@ -72,7 +68,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun unregisterClient() {
-        viewModelScope.launch(Dispatchers.IO) {
+        launchIO {
             amqpClient.unregisterChannel()
         }
     }

@@ -33,6 +33,8 @@ import java.util.concurrent.TimeoutException
  * - When connection in closed due to Socket Timeout (no internetConnection)
  * , unregister fails to close connection and channel.
  * - Does not survives restart (due to change in theme etc)
+ *
+ * lifecycle needs to be on [onSTart - onStOp]
  */
 class RabbitMQClient(
     host: String, port: Int,
@@ -78,6 +80,7 @@ class RabbitMQClient(
         factory.port = port
         factory.username = uName
         factory.password = password
+        factory.isAutomaticRecoveryEnabled = false
         if( port == 5671 )
             factory.useSslProtocol()
     }
@@ -91,30 +94,37 @@ class RabbitMQClient(
         }
     }
 
+    override fun registerAndConsume(queueName: String, doSomething: (m: Message?) -> Unit) {
+        if (!connected) {
+
+            connection = factory.newConnection()
+            channel = connection.createChannel()
+            connected = true
+            try {
+                channel.basicConsume(queueName, AUTO_ACKNOWLEDGMENT, AMQPConsumer(channel ,deserializer ,doSomething))
+            } catch (exception: Exception) {
+                when (exception) {
+                    is IOException, is TimeoutException -> {
+                        unregisterChannel(); Timber.d(exception)
+                    }
+                    else -> throw exception
+                }
+                connected = false
+            }
+            Timber.d("Channels registered")
+        }
+    }
+
     /**
      * Run this method in a IO Scope
      */
     @Throws(NotFound.ItsYourFaultIdiotException::class)
+    @Deprecated("Use registerAndConsume instead")
     override fun consumeMessage(queue: String, doSomething: (m: Message?) -> Unit) {
         if (Thread.currentThread().equals(Looper.getMainLooper().thread))
             throw NotFound.ItsYourFaultIdiotException(Constants.WRONG_THREAD_EXCEPTION_IO)
         try {
-            channel.basicConsume(queue, AUTO_ACKNOWLEDGMENT,
-                object : DefaultConsumer(channel) {
-                    override fun handleDelivery(
-                        tag: String,
-                        e: Envelope?,
-                        p: AMQP.BasicProperties?,
-                        body: ByteArray
-                    ) {
-                        super.handleDelivery(tag, e, p, body)
-                        val jsonString = String(body)
-                        val messageData = deserializer.fromJson(jsonString, Message::class.java)
-                        doSomething(messageData)
-                        Timber.e("${e?.deliveryTag} ${messageData.data}")
-                    }
-                }
-            )
+            channel.basicConsume(queue, AUTO_ACKNOWLEDGMENT, AMQPConsumer(channel ,deserializer ,doSomething))
         } catch (exception: Exception) {
             when (exception) {
                 is IOException, is TimeoutException -> {
@@ -128,15 +138,15 @@ class RabbitMQClient(
     override fun unregisterChannel() {
         if (connected) {
             connected = false
+//            try {
+//                if (channel.isOpen) channel.close(AMQP.RESOURCE_ERROR, "channel force exit")
+//            } catch (e: Exception) {
+//                Timber.e(e)
+//            }
             try {
-                if (channel.isOpen) channel.close(AMQP.RESOURCE_ERROR, "no internet")
+                if (connection.isOpen) connection.close(AMQP.REPLY_SUCCESS, "connection force exit", 10)
             } catch (e: Exception) {
-                Timber.d(e)
-            }
-            try {
-                if (connection.isOpen) connection.close(AMQP.RESOURCE_ERROR, "no internet", 10)
-            } catch (e: Exception) {
-                Timber.d(e)
+                Timber.e(e)
             }
             Timber.d("Channels unregistered")
         }

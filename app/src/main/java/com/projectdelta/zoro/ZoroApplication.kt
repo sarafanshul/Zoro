@@ -29,7 +29,7 @@ class ZoroApplication : Application() ,Configuration.Provider {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(CustomDebugTree())
-            setupStrictMode()
+//            setupStrictMode()
         }
 
     }
