@@ -34,13 +34,13 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
+        setSecureMode()
+
         setContentView(binding.root)
 
         registerObservers()
 
         setupNavController()
-
-        initUI()
 
     }
 
@@ -50,23 +50,20 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
 
         connectivityManager.isNetworkAvailable.observe(this) { isOnline ->
             when (isOnline) {
-                true -> {
-                    viewModel.registerClient(userPreferences?.userId!!)
-                }
-                false -> {
-                    viewModel.unregisterClient()
-                }
+                true -> viewModel.registerClient(userPreferences?.userId!!)
+                false -> viewModel.unregisterClient()
             }
         }
 
         collectLatestLifecycleFlow(viewModel.newMessage) {
-            if (it != null)
+            if (it != null) {
                 Alerter.create(this@MainActivity)
                     .setTitle("New Message from a friend.")// TODO( Fetch SenderName form server to display here )
                     .setText(it.data!!)
                     .setDuration(ALERT_NOTIFICATION_DURATION)
                     .setBackgroundColorInt(getResourceColor(R.attr.colorAccent))
                     .show()
+            }
         }
 
         collectLatestLifecycleFlow(viewModel.bottomNavVisibility) { integer ->
@@ -93,10 +90,6 @@ class MainActivity : BaseViewBindingActivity<ActivityMainBinding>() {
                 viewModel.showBottomNav()
             }
         }
-    }
-
-    private fun initUI() {
-
     }
 
     fun launchWebView(url: String, title: String?) {

@@ -5,6 +5,7 @@
 package com.projectdelta.zoro.ui.base
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.projectdelta.zoro.data.preferences.PreferencesManager
 import com.projectdelta.zoro.di.NetworkModule
@@ -47,6 +48,13 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onDestroy() {
         connectivityManager.unregisterConnectionObserver()
         super.onDestroy()
+    }
+
+    /**
+     * Sets secure flag (mostly prevents screenshots)
+     */
+    protected fun setSecureMode(){
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
     }
 
 }

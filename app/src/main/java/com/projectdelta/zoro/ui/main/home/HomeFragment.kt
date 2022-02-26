@@ -29,6 +29,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
 
+    companion object{
+        private const val DEFAULT_QUERY_HINT = "Contact name..."
+    }
+
     private var adapter: HomeRecyclerViewAdapter? = null
 
     private val viewModel: HomeViewModel by viewModels()
@@ -72,7 +76,7 @@ class HomeFragment : BaseViewBindingFragment<FragmentHomeBinding>() {
     private fun setSearchBar() {
         val searchView: SearchView? =
             binding.toolbar.menu.findItem(R.id.action_search).actionView as SearchView?
-        searchView?.queryHint = "Contact name..."
+        searchView?.queryHint = DEFAULT_QUERY_HINT
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

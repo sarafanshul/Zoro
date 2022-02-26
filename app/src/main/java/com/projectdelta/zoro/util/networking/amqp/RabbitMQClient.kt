@@ -13,8 +13,6 @@ import com.rabbitmq.client.AMQP
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.Connection
 import com.rabbitmq.client.ConnectionFactory
-import com.rabbitmq.client.DefaultConsumer
-import com.rabbitmq.client.Envelope
 import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.TimeoutException
@@ -44,7 +42,8 @@ class RabbitMQClient(
 
     companion object {
 
-        private const val AUTO_ACKNOWLEDGMENT = true
+        private const val AUTO_ACKNOWLEDGMENT = true // send read receipts to broker
+        private const val PORT_FOR_SSL = 5671 // 5671 uses ssl and 5672 does not.
 
         @Volatile
         private var INSTANCE: RabbitMQClient? = null
@@ -81,10 +80,11 @@ class RabbitMQClient(
         factory.username = uName
         factory.password = password
         factory.isAutomaticRecoveryEnabled = false
-        if( port == 5671 )
+        if( port == PORT_FOR_SSL )
             factory.useSslProtocol()
     }
 
+    @Deprecated("Use registerAndConsume instead")
     override fun registerChannel() {
         if (!connected) {
             connected = true
@@ -138,11 +138,6 @@ class RabbitMQClient(
     override fun unregisterChannel() {
         if (connected) {
             connected = false
-//            try {
-//                if (channel.isOpen) channel.close(AMQP.RESOURCE_ERROR, "channel force exit")
-//            } catch (e: Exception) {
-//                Timber.e(e)
-//            }
             try {
                 if (connection.isOpen) connection.close(AMQP.REPLY_SUCCESS, "connection force exit", 10)
             } catch (e: Exception) {
