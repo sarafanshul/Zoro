@@ -22,12 +22,18 @@ style:
     active: true
     maxLineLength: 145
   MagicNumber:
+    active: false
     excludes: [ '**/test/**/*' ]
   NewLineAtEndOfFile:
     active: false
 naming:
   ConstructorParameterNaming:
     active: false
+  VariableNaming:
+    active: false
 performance:
   SpreadOperator:
+    active: false
+exceptions:
+  TooGenericExceptionCaught:
     active: false

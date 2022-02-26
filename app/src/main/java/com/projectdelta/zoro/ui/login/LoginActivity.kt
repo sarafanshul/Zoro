@@ -11,7 +11,6 @@ import androidx.activity.viewModels
 import androidx.biometric.BiometricPrompt
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
-import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.projectdelta.zoro.R
 import com.projectdelta.zoro.data.preferences.UserPreferences
@@ -29,7 +28,6 @@ import com.projectdelta.zoro.util.system.lang.toEditable
 import com.projectdelta.zoro.util.work.UpdateDatabaseWorker
 import com.tapadoo.alerter.Alerter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseViewBindingActivity<ActivityLoginBinding>() {

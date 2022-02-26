@@ -74,8 +74,6 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        registerObservers()
-
         initUI()
 
     }
@@ -99,8 +97,6 @@ class UserFragment : BaseViewBindingFragment<FragmentUserBinding>() {
         }
 
     }
-
-    private fun registerObservers() {}
 
     private fun showQr() {
         qrViewBinding.imageQr.setImageBitmap(viewModel.qrBitmap)

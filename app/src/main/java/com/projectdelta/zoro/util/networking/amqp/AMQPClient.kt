@@ -12,6 +12,8 @@ interface AMQPClient {
 
     fun registerChannel()
 
+    fun registerAndConsume(queueName: String, doSomething: (m: Message?) -> Unit)
+
     fun unregisterChannel()
 
     fun consumeMessage(queue: String, doSomething: (m: Message?) -> Unit)
