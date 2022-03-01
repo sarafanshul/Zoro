@@ -30,23 +30,23 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Run Detekt
-        run: ./gradlew detekt
       - name: Config Luffy API
         env:
           Y: ${{secrets.API_BASE_URL}}
         run: echo -e "API_BASE_URL=$Y \n" >> ./local.properties
       - name: Config Avatar API
         env:
-          X : ${{secrets.AVATAR_API}}
+          X: ${{secrets.AVATAR_API}}
         run: echo -e "AVATAR_API=$X \n" >> ./local.properties
       - name: Config RabbitMQ
         env:
-          A : ${{secrets.RABBITMQ_HOST}}
-          B : ${{secrets.RABBITMQ_PORT}}
-          C : ${{secrets.RABBIT_USER_NAME}}
-          D : ${{secrets.RABBIT_USER_PASSWORD}}
+          A: ${{secrets.RABBITMQ_HOST}}
+          B: ${{secrets.RABBITMQ_PORT}}
+          C: ${{secrets.RABBIT_USER_NAME}}
+          D: ${{secrets.RABBIT_USER_PASSWORD}}
         run: echo -e "RABBITMQ_HOST=$A\nRABBITMQ_PORT=$B\nRABBIT_USER_NAME=$C\nRABBIT_USER_PASSWORD=$D" >> ./local.properties
+      - name: Run Detekt
+        run: ./gradlew detekt
       # Make sure we always run this upload task,
       # because the previous step may fail if there are findings.
       - uses: github/codeql-action/upload-sarif@v1

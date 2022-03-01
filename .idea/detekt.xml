@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DetektProjectConfiguration">
+    <enableDetekt>true</enableDetekt>
+    <buildUponDefaultConfig>true</buildUponDefaultConfig>
+    <treatAsError>true</treatAsError>
+    <configPaths>E:\Android\Zoro\config\detekt\detekt.yml</configPaths>
+  </component>
+</project>

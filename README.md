@@ -63,7 +63,7 @@ UI is utilising a dual-theme approach, allowing users to choose from light or da
 ![kotlin](./assets/mad/kotlin.png)
 
 ## Architecture
-NarutoDex is based on MVVM architecture and a repository pattern.
+Zoro is based on MVVM architecture and a repository pattern.
 
 ![architecture](/assets/architecture/mvvm.png)
 
