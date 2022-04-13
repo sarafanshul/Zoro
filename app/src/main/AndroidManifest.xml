@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zoro">
         <activity
+            android:name=".ui.ExceptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.web.WebViewActivity"
             android:exported="false" />
         <activity
@@ -39,15 +42,11 @@
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation" />
-
-        <!-- Disable android.startup completely. (for WorkManagerInitializer) -->
+            tools:replace="screenOrientation" /> <!-- Disable android.startup completely. (for WorkManagerInitializer) -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            tools:node="remove">
-        </provider>
-
+            tools:node="remove"></provider>
     </application>
 
 </manifest>
